@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="plugins-toolkit" basedir=".">
+
+	<import file="nbproject/build-impl.xml"/>
+	<echo message="Using harness folder ${harness.dir}"/>
+
+    <target name="download-stable" depends="clean-stable" description="Download Netbeans Platform Localization JARs on the website">
+        <mkdir dir="${stable.dir}"/>
+		<get src="${stable.url}" dest="${stable.dir}/${archive.name}-stable.tar.gz" verbose="true" skipexisting="true" ignoreerrors="true"/>   
+    </target>
+
+    <target name="unzip-stable" depends="download-stable" description="Unzip Netbeans Platform Localization JARs">
+		<gunzip src="${stable.dir}/${archive.name}-stable.tar.gz"/>
+		<untar src="${stable.dir}/${archive.name}-stable.tar" dest="${stable.dir}"/>
+		<delete file="${stable.dir}/${archive.name}-stable.tar"/>
+    </target>
+
+    <target name="clean-stable" description="Clean l10n targets files and directories">
+        <delete dir="${stable.dir}/gephi" />
+    </target>
+</project>
