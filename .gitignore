@@ -1,0 +1,8 @@
+.DS_Store
+build/**
+**/build
+stable/**
+trunk/**
+nbproject/private/**
+dist/**
+**/nbproject/private
