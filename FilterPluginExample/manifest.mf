@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+OpenIDE-Module: org.gephi.plugins.example.filter
+OpenIDE-Module-Localizing-Bundle: org/gephi/plugins/example/filter/Bundle.properties
+OpenIDE-Module-Specification-Version: 1.0
+
