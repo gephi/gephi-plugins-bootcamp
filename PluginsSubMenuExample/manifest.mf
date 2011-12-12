@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-OpenIDE-Module: org.gephi.plugins.submenu.example
-OpenIDE-Module-Localizing-Bundle: org/gephi/plugins/submenu/example/Bundle.properties
+OpenIDE-Module: org.gephi.plugins.example.submenu
+OpenIDE-Module-Localizing-Bundle: org/gephi/plugins/example/submenu/Bundle.properties
 OpenIDE-Module-Specification-Version: 1.0
 

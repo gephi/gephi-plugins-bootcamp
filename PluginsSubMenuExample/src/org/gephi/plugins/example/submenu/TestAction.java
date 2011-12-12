@@ -39,51 +39,45 @@ Contributor(s):
 
 Portions Copyrighted 2011 Gephi Consortium.
  */
-package org.gephi.plugins.processor.example;
+package org.gephi.plugins.example.submenu;
 
-import java.util.Random;
-import org.gephi.io.importer.api.NodeDraftGetter;
-import org.gephi.io.processor.plugin.DefaultProcessor;
-import org.gephi.io.processor.spi.Processor;
-import org.openide.util.lookup.ServiceProvider;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JPanel;
+import org.openide.DialogDescriptor;
+import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
+import org.openide.awt.ActionRegistration;
+import org.openide.awt.ActionReference;
+import org.openide.awt.ActionReferences;
+import org.openide.awt.ActionID;
+import org.openide.util.NbBundle.Messages;
 
 /**
- * Example of a new processor that set up the initial position of nodes using
- * a hash so it's always the same for a given graph.
+ * Example of an action accessible from the "Plugins" menu un the menubar.
  * <p>
- * Processors are responsible for adding data imported in importers to the main
- * graph structure. The user can choose which processor to use from the Import
- * Report panel (Full graph, Append...). This example modifies the default processor
- * and set the nodes' position.
+ * The annotations on the class defines the menu's name, position and class.
  * 
  * @author Mathieu Bastian
  */
-@ServiceProvider(service = Processor.class, position = 1000)
-public class InitalPositionProcessor extends DefaultProcessor implements Processor {
+@ActionID(category = "File",
+id = "org.gephi.desktop.filters.TestAction")
+@ActionRegistration(displayName = "#CTL_TestAction")
+@ActionReferences({
+    @ActionReference(path = "Menu/Plugins", position = 3333)
+})
+@Messages("CTL_TestAction=Testing...")
+public final class TestAction implements ActionListener {
 
     @Override
-    public void process() {
-        long hash = 0;
-        
-        //Calculate the hash of the current graph
-        for(NodeDraftGetter nodeDraft : container.getNodes()) {
-            String id = nodeDraft.getId();
-            hash += id.hashCode();
-        }
-        
-        //Create a random with this seed
-        Random random = new Random(hash);
-        for(NodeDraftGetter nodeDraft : container.getNodes()) {
-            nodeDraft.setX((float) ((0.01 + random.nextDouble()) * 1000) - 500);
-            nodeDraft.setY((float) ((0.01 + random.nextDouble()) * 1000) - 500);
-        }
-        
-        //Call default processor
-        super.process();
-    }
+    public void actionPerformed(ActionEvent e) {
+        //Do something, display a message
+        NotifyDescriptor d = new NotifyDescriptor.Message("Hello...now trying to display a dialog", NotifyDescriptor.INFORMATION_MESSAGE);
+        DialogDisplayer.getDefault().notify(d);
 
-    @Override
-    public String getDisplayName() {
-        return "Inital position";
+        //Do something - for instance display a dialog
+        //Dialogs API documentation: http://bits.netbeans.org/dev/javadoc/org-openide-dialogs/index.html?overview-summary.html
+        DialogDescriptor dd = new DialogDescriptor(new JPanel(), "My Dialog", false, null);
+        DialogDisplayer.getDefault().notify(dd);
     }
 }
