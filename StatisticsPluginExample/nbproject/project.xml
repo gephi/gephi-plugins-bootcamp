@@ -31,12 +31,11 @@
                     </run-dependency>
                 </dependency>
                 <dependency>
-                    <code-name-base>org.jdesktop.layout</code-name-base>
+                    <code-name-base>org.jdesktop.swingx</code-name-base>
                     <build-prerequisite/>
                     <compile-dependency/>
                     <run-dependency>
-                        <release-version>1</release-version>
-                        <specification-version>1.17.1</specification-version>
+                        <specification-version>1.6.1</specification-version>
                     </run-dependency>
                 </dependency>
                 <dependency>
@@ -49,10 +48,6 @@
                 </dependency>
             </module-dependencies>
             <public-packages/>
-            <class-path-extension>
-                <runtime-relative-path>ext/swingx-1.6.1.jar</runtime-relative-path>
-                <binary-origin>release/modules/ext/swingx-1.6.1.jar</binary-origin>
-            </class-path-extension>
         </data>
     </configuration>
 </project>
