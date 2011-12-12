@@ -8,7 +8,7 @@ The Gephi Plugins Bootcamp is the best sources of examples and good practices to
 
 Complete list of the plug-ins examples included in the bootcamp:
 
-#### Layout
+### Layout
 
 - **Grid Layout**
 
@@ -18,7 +18,7 @@ Complete list of the plug-ins examples included in the bootcamp:
 
         Same example as Grid Layout but users can sort nodes with an attribute column.
 
-#### Filter
+### Filter
 
 - **Transform to Undirected** 
 
@@ -32,7 +32,7 @@ Complete list of the plug-ins examples included in the bootcamp:
 
         Example of a complex filter implementation which removes edges until no crossing occurs.
 
-#### Tool
+### Tool
 
 - **Find** 
 
@@ -42,7 +42,7 @@ Complete list of the plug-ins examples included in the bootcamp:
 
         Listen to mouse clicks and adds nodes. Also adds edges if selecting other nodes.
 
-#### Export
+### Export
 
 - **JPG Export** 
 
@@ -52,7 +52,7 @@ Complete list of the plug-ins examples included in the bootcamp:
 
         Current graph export to a SQLite Database file. A new sub-menu is added in the Export menu and an example of a custom exporter is shown.
 
-#### Preview
+### Preview
 
 - **Highlight Mutual Edges** 
 
@@ -66,13 +66,13 @@ Complete list of the plug-ins examples included in the bootcamp:
 
         Extends the default node builder by reordering the node items by size or any number columns. Also shows how to create complex Preview UI.
 
-#### Import
+### Import
 
 - **Matrix Market Importer** 
 
-        File importer for the Matrix Market format. Lot's of datasets [here](http://www2.research.att.com/~yifanhu/GALLERY/GRAPHS/index.html).
+        File importer for the Matrix Market format.
 
-#### Statistic
+### Statistic
 
 - **Count Self-Loop** 
 
@@ -82,7 +82,7 @@ Complete list of the plug-ins examples included in the bootcamp:
 
         Example of a per-node calculation. For a given node it calculates the average distance to others.
 
-#### Plugins sub-menu
+### Plugins sub-menu
 
 - **Test action** 
 
@@ -96,7 +96,7 @@ Complete list of the plug-ins examples included in the bootcamp:
 
         Action which creates a long task and execute it with progress and cancel support.
 
-#### Execute at startup
+### Execute at startup
 
 - **When UI is ready** 
 
@@ -106,7 +106,7 @@ Complete list of the plug-ins examples included in the bootcamp:
 
         Do something when a workspace is selected.
 
-#### Processor
+### Processor
 
 - **Initial Position** 
 
