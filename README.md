@@ -9,70 +9,61 @@ The Gephi Plugins Bootcamp is the best sources of examples and good practices to
 Complete list of the plug-ins examples included in the bootcamp:
 
 #### Layout
-<table>
-    <tr><td><b>Grid Layout</b></td><td>Place all nodes in a simple grid. Users can configure the size of the area and the speed.</td></tr>
-    <tr><td><b>Sorted Grid Layout</b></td><td>Same example as Grid Layout but users can sort nodes with an attribute column.</td></tr>
-</table>
+
+- **Grid Layout** Place all nodes in a simple grid. Users can configure the size of the area and the speed.
+- **Sorted Grid Layout** Same example as Grid Layout but users can sort nodes with an attribute column.
 
 #### Filter
-<table>
-    <tr><td><b>Transform to Undirected</b></td><td>Edge filter to remove mutual edges in a directed graph.</td></tr>
-	<tr><td><b>Top nodes</b></td><td>Keep the top K nodes using an attribute column.</td></tr>
-    <tr><td><b>Remove Edge Crossing</b></td><td>Example of a complex filter implementation which removes edges until no crossing occurs.</td></tr>
-</table>
+
+- **Transform to Undirected** Edge filter to remove mutual edges in a directed graph.
+- **Top nodes** Keep the top K nodes using an attribute column.
+- **Remove Edge Crossing** Example of a complex filter implementation which removes edges until no crossing occurs.
 
 #### Tool
-<table>
-    <tr><td><b>Find</b></td><td>Tool with a autocomplete text field to find any node based on labels and zoom by it.</td></tr>
-	<tr><td><b>Add Nodes</b></td><td>Listen to mouse clicks and adds nodes. Also adds edges if selecting other nodes.</td></tr>
-</table>
+
+- **Find** Tool with a autocomplete text field to find any node based on labels and zoom by it.
+- **Add Nodes** Listen to mouse clicks and adds nodes. Also adds edges if selecting other nodes.
 
 #### Export
-<table>
-    <tr><td><b>JPG Export</b></td><td>Vectorial export to the JPG image format. Contains a settings panel to set the width and height.</td></tr>
-	<tr><td><b>SQLite Database Export</b></td><td>Current graph export to a SQLite Database file. A new sub-menu is added in the Export menu and an example of a custom exporter is shown.</td></tr>
-</table>
+
+- **JPG Export** Vectorial export to the JPG image format. Contains a settings panel to set the width and height.
+- **SQLite Database Export** Current graph export to a SQLite Database file. A new sub-menu is added in the Export menu and an example of a custom exporter is shown.
 
 #### Preview
-<table>
-    <tr><td><b>Highlight Mutual Edges</b></td><td>Colors differently mutual edges. Overwrites and extends the default edge renderer.</td></tr>
-	<tr><td><b>Glow Renderer</b></td><td>Adds a new renderer for node items which draws a glow effect around nodes.</td></tr>
-	<tr><td><b>Node Z-ordering</b></td><td>Extends the default node builder by reordeing the node items by size or any number columns. Also shows how to create complex Preview UI.</td></tr>
-</table>
+
+- **Highlight Mutual Edges** Colors differently mutual edges. Overwrites and extends the default edge renderer.
+- **Glow Renderer** Adds a new renderer for node items which draws a glow effect around nodes.
+- **Node Z-ordering** Extends the default node builder by reordering the node items by size or any number columns. Also shows how to create complex Preview UI.
 
 #### Import
-<table>
-    <tr><td><b>Matrix Market Importer</b></td><td>File importer for the Matrix Market format. Lot's of datasets [here](http://www2.research.att.com/~yifanhu/GALLERY/GRAPHS/index.html).</td></tr>
-</table>
+
+- **Matrix Market Importer** File importer for the Matrix Market format. Lot's of datasets [here](http://www2.research.att.com/~yifanhu/GALLERY/GRAPHS/index.html).
 
 #### Statistic
-<table>
-    <tr><td><b>Count Self-Loop</b></td><td>Example of a statistics result at the global level. Simply counts the number of self-loop edges in the graph</td></tr>
-	<tr><td><b>Average Euclidean Distance</b></td><td>Example of a per-node calculation. For a given node it calculates the average distance to others.</td></tr>
-</table>
+
+- **Count Self-Loop** Example of a statistics result at the global level. Simply counts the number of self-loop edges in the graph
+- **Average Euclidean Distance** Example of a per-node calculation. For a given node it calculates the average distance to others.
 
 #### Plugins sub-menu
-<table>
-    <tr><td><b>Test action</b></td><td>Simple action which display a message and a dialog.</td></tr>
-	<tr><td><b>Remove self loops</b></td><td>Action which accesses the graph and remove self-loops, if any.</td></tr>
-	<tr><td><b>Using Progress and Cancel</b></td><td>Action which creates a long task and execute it with progress and cancel support.</td></tr>
-</table>
+
+- **Test action** Simple action which display a message and a dialog.
+- **Remove self loops** Action which accesses the graph and remove self-loops, if any.
+- **Using Progress and Cancel** Action which creates a long task and execute it with progress and cancel support.
 
 #### Execute at startup
-<table>
-    <tr><td><b>When UI is ready</b></td><td>Do something when the UI finished loading.</td></tr>
-	<tr><td><b>Workspace select events</b></td><td>Do something when a workspace is selected.</td></tr>
-</table>
+
+- **When UI is ready** Do something when the UI finished loading.
+- **Workspace select events** Do something when a workspace is selected.
 
 #### Processor
-<table>
-    <tr><td><b>Initial Position</b></td><td>Set up the nodes' initial position always the same. It calculates a hash with all nodes so the X/Y position is randomized always in the same way.</td></tr>
-</table>
+
+- **Initial Position** Set up the nodes' initial position always the same. It calculates a hash with all nodes so the X/Y position is randomized always in the same way.
+
 
 ### New Panel
-<table>
-    <tr><td><b>New panel</b></td><td>Example of a new panel plugin set up at the ranking position.</td></tr>
-</table>
+
+- **New panel** Example of a new panel plugin set up at the ranking position.
+
 
 ## Installation
 
