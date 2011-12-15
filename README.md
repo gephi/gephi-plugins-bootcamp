@@ -11,7 +11,7 @@ Complete list of the plug-ins examples included in the bootcamp:
 ### Layout
 
 * **Grid Layout**
-Place all nodes in a simple grid. Users can configure the size of the area and the speed.
+	Place all nodes in a simple grid. Users can configure the size of the area and the speed.
 
 * **Sorted Grid Layout** 
 Same example as Grid Layout but users can sort nodes with an attribute column.
