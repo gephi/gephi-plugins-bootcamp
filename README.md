@@ -4,6 +4,8 @@ Get started with the [Gephi](http://gephi.org) Platform and start to create [Gep
 
 The Gephi Plugins Bootcamp is the best sources of examples and good practices to create all types of plug-ins (layout, filter, io, visualization, ...). Consult the [**Javadoc**](http://gephi.org/docs) to discover the different APIs. Documentation is also available on the [Toolkit Portal](https://wiki.gephi.org/index.php/Plugins_portal) on the wiki.
 
+![Gephi Plugins Bootcamp](http://gephi.org/wp-content/uploads/2011/12/plugins_ribbon.png)
+
 ## What's inside?
 
 Complete list of the plug-ins examples included in the bootcamp:
