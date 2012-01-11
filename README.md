@@ -98,21 +98,20 @@ Complete list of the plug-ins examples included in the bootcamp:
 * **New panel** 
 	* Example of a new panel plugin set up at the ranking position.
 
-
 ## Installation
 
 Follow the steps to get the right development environment for developing Gephi plug-ins. The bootcamp contains the latest version of the Gephi Platform plus the examples. 
 
 - Download and install the latest version of [Netbeans IDE](http://netbeans.org).
-- Checkout the latest version of the Gephi Plugins Bootcamp
+- Fork and checkout the latest version of the Gephi Plugins Bootcamp
 
-        git clone git@github.com:gephi/gephi-plugins-bootcamp.git
+        git clone git@github.com:username/gephi-plugins-bootcamp.git
 
 - Start Netbeans and Open Project. The bootcamp is automatically recognized as a module suite.
-- Right click on the project and do 'Run'. This starts Gephi with all the example plug-ins loaded.
+- Right click on the project and select 'Run'. This starts Gephi with all the example plug-ins loaded.
 - Expand the list of modules and double-click on each to open them and browse the sources.
 
-Once you feel comfortable starting your own plug-in, follow the [Plugin Quick Start (5 minutes)](http://wiki.gephi.org/index.php/Plugin_Quick_Start_(5_minutes)).
+Once you feel comfortable starting your own plug-in, simply delete all examples and create your own module. You can find more information on  the [Plugin Quick Start (5 minutes)](http://wiki.gephi.org/index.php/Plugin_Quick_Start_(5_minutes)).
 
 Consult the [**Javadoc**](http://gephi.org/docs) to browse the APIs.
 
@@ -126,5 +125,13 @@ At the root directory of the bootcamp just do
 
 to start Gephi with the plug-ins.
 
+## FAQ
 
+#### How to add a new module? ####
+
+Right click on your project and <code>Add New</code>.
+
+#### How to create a new panel? ####
+
+To profit from Netbeans' Visual Editor, create a JPanel instead of a standard Java class.
 
