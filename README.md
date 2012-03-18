@@ -69,6 +69,14 @@ Complete list of the plug-ins examples included in the bootcamp:
 * **Average Euclidean Distance** 
 	* Example of a per-node calculation. For a given node it calculates the average distance to others.
 
+### Generator
+
+* **Simple generator**
+	* Hello world generator which creates a two nodes network.
+
+* **Streaming generator**
+	* Shows how to create a continuous generator using threads.
+
 ### Plugins sub-menu
 
 * **Test action** 
