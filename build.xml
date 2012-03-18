@@ -1,37 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="plugins-toolkit" basedir=".">
+<project name="gephi-plugins-bootcamp" basedir=".">
 
     <import file="nbproject/build-impl.xml"/>
     <echo message="Using harness folder ${harness.dir}"/>
 
-    <target name="download-stable" depends="clean-stable" description="Download Netbeans Platform Localization JARs on the website">
-        <mkdir dir="${stable.dir}"/>
-        <get src="${stable.release.url}" dest="${stable.dir}/${archive.name}-stable.tar.gz" verbose="true" skipexisting="true" ignoreerrors="true"/>
-        <get src="${stable.sources.url}" dest="${stable.dir}/${archive.name}-sources.zip" verbose="true" skipexisting="true" ignoreerrors="true"/>  
-    </target>
-
-    <target name="unzip-stable" depends="download-stable" description="Unzip Netbeans Platform Localization JARs">
-        <gunzip src="${stable.dir}/${archive.name}-stable.tar.gz"/>
-        <untar src="${stable.dir}/${archive.name}-stable.tar" dest="${stable.dir}"/>
-        <delete file="${stable.dir}/${archive.name}-stable.tar"/>
-    </target>
-
-    <target name="clean-stable" description="Clean l10n targets files and directories">
-        <delete dir="${stable.dir}/gephi" />
-    </target>
-
-	<!-- Download the latest stable gephi version -->
-    <target name="update-stable">
-        <property name="gephi.version" value="0.8-beta"/>
-        <taskdef name="autoupdate" classname="org.netbeans.nbbuild.AutoUpdate" classpath="${harness.dir}/tasks.jar"/>
-        <autoupdate installdir="${stable.dir}/gephi" updatecenter="http://gephi.org/updates/official/${gephi.version}/catalog.xml" force="false">
-            <modules includes=".*" clusters="gephi*"/>
-        </autoupdate>
-    </target>
-
 	<!-- Override nbms target to add a zip distribution release -->
 	<target name="nbms" depends="suite.nbms">
-		<zip destfile="build/plugins-release.zip"
+		<zip destfile="build/plugin-release.zip"
 	       basedir="build/updates/"
 	       includes="*.nbm"
 		/>
