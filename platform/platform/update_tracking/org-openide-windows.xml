@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <module codename="org.openide.windows">
-    <module_version install_time="1332093678507" last="true" origin="Ant" specification_version="6.40.1">
-        <file crc="3501802074" name="modules/locale/org-openide-windows_ja.jar"/>
-        <file crc="1675007166" name="modules/locale/org-openide-windows_pt_BR.jar"/>
-        <file crc="2700299681" name="modules/locale/org-openide-windows_ru.jar"/>
-        <file crc="4229475394" name="modules/locale/org-openide-windows_zh_CN.jar"/>
+    <module_version install_time="1323291990390" last="false" origin="installer" specification_version="6.48.1">
         <file crc="3877728110" name="config/Modules/org-openide-windows.xml"/>
-        <file crc="3949341827" name="modules/org-openide-windows.jar"/>
+        <file crc="498898423" name="modules/locale/org-openide-windows_ja.jar"/>
+        <file crc="2107254862" name="modules/locale/org-openide-windows_pt_BR.jar"/>
+        <file crc="1942345174" name="modules/locale/org-openide-windows_ru.jar"/>
+        <file crc="787817379" name="modules/locale/org-openide-windows_zh_CN.jar"/>
+        <file crc="3851881097" name="modules/org-openide-windows.jar"/>
+    </module_version>
+    <module_version install_time="1331741426330" last="true" origin="NetBeans Distribution" specification_version="6.48.2">
+        <file crc="1760819278" name="modules/locale/org-openide-windows_ja.jar"/>
+        <file crc="4043686124" name="modules/locale/org-openide-windows_pt_BR.jar"/>
+        <file crc="1909074487" name="modules/locale/org-openide-windows_ru.jar"/>
+        <file crc="404832955" name="modules/locale/org-openide-windows_zh_CN.jar"/>
+        <file crc="3877728110" name="config/Modules/org-openide-windows.xml"/>
+        <file crc="3129891330" name="modules/org-openide-windows.jar"/>
     </module_version>
 </module>

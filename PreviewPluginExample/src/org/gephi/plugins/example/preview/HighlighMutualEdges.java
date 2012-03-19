@@ -50,6 +50,7 @@ import org.gephi.preview.api.RenderTarget;
 import org.gephi.preview.plugin.items.EdgeItem;
 import org.gephi.preview.plugin.renderers.EdgeRenderer;
 import org.gephi.preview.spi.Renderer;
+import org.openide.util.NbBundle;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -88,6 +89,11 @@ public class HighlighMutualEdges implements Renderer {
     //Default values
     protected boolean defaultHighlightMutualEdges = false;
     protected Color defaultHighlightColor = Color.RED;
+    
+    @Override
+    public String getDisplayName() {
+        return NbBundle.getMessage(HighlighMutualEdges.class, "HighlighMutualEdges.name");
+    }
 
     @Override
     public void preProcess(PreviewModel previewModel) {

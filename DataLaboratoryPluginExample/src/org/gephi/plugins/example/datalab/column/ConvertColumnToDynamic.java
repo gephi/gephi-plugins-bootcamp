@@ -57,7 +57,7 @@ import org.openide.util.NbBundle;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
- * AttributeColumnsManipulator that replaces a column with its dynamic equivalent in a default interval.
+ * AttributeColumnsManipulator that replaces a column with its dynamic equivalent with a defined interval.
  *
  * @author Eduardo Ramos<eduramiba@gmail.com>
  */

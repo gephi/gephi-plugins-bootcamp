@@ -57,6 +57,7 @@ import org.gephi.preview.api.SVGTarget;
 import org.gephi.preview.plugin.items.NodeItem;
 import org.gephi.preview.plugin.renderers.NodeRenderer;
 import org.gephi.preview.spi.Renderer;
+import org.openide.util.NbBundle;
 import org.openide.util.lookup.ServiceProvider;
 import processing.core.PGraphicsJava2D;
 
@@ -82,9 +83,15 @@ import processing.core.PGraphicsJava2D;
  */
 @ServiceProvider(service = Renderer.class, position = 10)
 public class GlowRenderer implements Renderer {
+    
 
     //Custom properties
     public static final String ENABLE_NODE_GLOW = "node.glow.enable";
+    
+    @Override
+    public String getDisplayName() {
+        return NbBundle.getMessage(GlowRenderer.class, "GlowRenderer.name");
+    }
     
     @Override
     public void preProcess(PreviewModel pm) {

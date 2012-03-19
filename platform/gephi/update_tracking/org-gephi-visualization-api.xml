@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.visualization.api">
-    <module_version install_time="1332093837729" last="true" origin="Ant" specification_version="0.8.0.1">
-        <file crc="3747695490" name="config/Modules/org-gephi-visualization-api.xml"/>
-        <file crc="2778728396" name="modules/org-gephi-visualization-api.jar"/>
+    <module_version install_time="1332180926564" last="true" origin="installer" specification_version="0.8.0.1">
+        <file crc="3305614816" name="config/Modules/org-gephi-visualization-api.xml"/>
+        <file crc="2054696447" name="modules/org-gephi-visualization-api.jar"/>
     </module_version>
 </module>

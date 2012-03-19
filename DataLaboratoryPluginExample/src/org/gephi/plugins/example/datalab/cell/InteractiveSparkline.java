@@ -62,7 +62,7 @@ import org.openide.util.ImageUtilities;
 import org.openide.util.NbBundle;
 
 /**
- * AttributeValueManipulator (table cell) that shows an interactive sparkline of a list number or dynamic number.
+ * AttributeValueManipulator (table cell) that shows an interactive sparkline of a number list or dynamic number.
  *
  * @author Eduardo Ramos <eduramiba@gmail.com>
  */

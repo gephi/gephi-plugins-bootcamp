@@ -55,6 +55,9 @@ Complete list of the plug-ins examples included in the bootcamp:
 
 * **Node Z-ordering** 
 	* Extends the default node builder by reordering the node items by size or any number columns. Also shows how to create complex Preview UI.
+	
+* **Square shaped nodes** 
+	* Demonstrates how to extend and replace a default renderer. Extends node default renderer to support square shaped nodes.
 
 ### Import
 
@@ -76,6 +79,23 @@ Complete list of the plug-ins examples included in the bootcamp:
 
 * **Streaming generator**
 	* Shows how to create a continuous generator using threads.
+	
+### Data laboratory
+
+* **Interactive sparkline**
+	* Table cell action that shows an interactive sparkline of a number list or dynamic number.
+	
+* **Convert column to dynamic**
+	* Column action that replaces a column with its dynamic equivalent with a defined interval.
+	
+* **Invert row selection**
+	* General action (plugin) that inverts the current table row selection.
+	
+* **Equal values merge strategy**
+	* Column merge strategy that creates a new boolean column with values indicating if the two given columns have the same value.
+	
+* **Set node(s) color**
+	* Nodes action that edits the color of one or more nodes
 
 ### Plugins sub-menu
 
