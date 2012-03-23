@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.desktop.spigot">
-    <module_version install_time="1332180939769" last="true" origin="installer" specification_version="0.8">
+    <module_version install_time="1332519432837" last="true" origin="installer" specification_version="0.8">
         <file crc="3046842239" name="config/Modules/org-gephi-desktop-spigot.xml"/>
-        <file crc="1286535891" name="modules/org-gephi-desktop-spigot.jar"/>
+        <file crc="235222975" name="modules/org-gephi-desktop-spigot.jar"/>
     </module_version>
 </module>

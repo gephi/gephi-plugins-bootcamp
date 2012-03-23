@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.jdesktop.swingx">
-    <module_version install_time="1332180930460" last="true" origin="installer" specification_version="1.6.1">
+    <module_version install_time="1332519428098" last="true" origin="installer" specification_version="1.6.1">
         <file crc="3305547730" name="config/Modules/org-jdesktop-swingx.xml"/>
         <file crc="366189765" name="modules/ext/swingx-1.6.1.jar"/>
         <file crc="4215662872" name="modules/ext/swingx-beaninfo-1.6.1.jar"/>
-        <file crc="86206819" name="modules/org-jdesktop-swingx.jar"/>
+        <file crc="177733622" name="modules/org-jdesktop-swingx.jar"/>
     </module_version>
 </module>

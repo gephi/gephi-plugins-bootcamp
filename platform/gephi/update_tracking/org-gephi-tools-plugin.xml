@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.tools.plugin">
-    <module_version install_time="1332180967781" last="true" origin="installer" specification_version="0.8.0.5">
+    <module_version install_time="1332519447951" last="true" origin="installer" specification_version="0.8.0.5">
         <file crc="539467068" name="config/Modules/org-gephi-tools-plugin.xml"/>
-        <file crc="2267646866" name="modules/org-gephi-tools-plugin.jar"/>
+        <file crc="2540500233" name="modules/org-gephi-tools-plugin.jar"/>
     </module_version>
 </module>

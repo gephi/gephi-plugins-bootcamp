@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.desktop.partition">
-    <module_version install_time="1332180946928" last="true" origin="installer" specification_version="0.8">
+    <module_version install_time="1332519436650" last="true" origin="installer" specification_version="0.8">
         <file crc="225901071" name="config/Modules/org-gephi-desktop-partition.xml"/>
-        <file crc="1407248932" name="modules/org-gephi-desktop-partition.jar"/>
+        <file crc="2900084208" name="modules/org-gephi-desktop-partition.jar"/>
     </module_version>
 </module>
