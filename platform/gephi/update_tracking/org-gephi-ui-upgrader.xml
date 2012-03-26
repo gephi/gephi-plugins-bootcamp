@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.ui.upgrader">
-    <module_version install_time="1332519405042" last="true" origin="installer" specification_version="0.8">
+    <module_version install_time="1332790434749" last="true" origin="installer" specification_version="0.8">
         <file crc="2780943924" name="config/Modules/org-gephi-ui-upgrader.xml"/>
-        <file crc="2996654149" name="modules/org-gephi-ui-upgrader.jar"/>
+        <file crc="215342377" name="modules/org-gephi-ui-upgrader.jar"/>
     </module_version>
 </module>

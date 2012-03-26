@@ -43,19 +43,13 @@ package org.gephi.plugins.example.preview;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Paint;
 import java.awt.RadialGradientPaint;
 import java.awt.geom.Point2D;
-import org.gephi.preview.api.Item;
-import org.gephi.preview.api.PDFTarget;
-import org.gephi.preview.api.PreviewModel;
-import org.gephi.preview.api.PreviewProperties;
-import org.gephi.preview.api.PreviewProperty;
-import org.gephi.preview.api.ProcessingTarget;
-import org.gephi.preview.api.RenderTarget;
-import org.gephi.preview.api.SVGTarget;
+import org.gephi.preview.api.*;
+import org.gephi.preview.plugin.builders.NodeBuilder;
 import org.gephi.preview.plugin.items.NodeItem;
 import org.gephi.preview.plugin.renderers.NodeRenderer;
+import org.gephi.preview.spi.ItemBuilder;
 import org.gephi.preview.spi.Renderer;
 import org.openide.util.NbBundle;
 import org.openide.util.lookup.ServiceProvider;
@@ -153,7 +147,12 @@ public class GlowRenderer implements Renderer {
     }
     
     @Override
-    public boolean isRendererForitem(Item item, PreviewProperties pp) {
-        return item.getType().equals(Item.NODE) && pp.getBooleanValue(ENABLE_NODE_GLOW);
+    public boolean isRendererForitem(Item item, PreviewProperties properties) {
+        return item instanceof NodeItem && properties.getBooleanValue(ENABLE_NODE_GLOW);
+    }
+    
+    @Override
+    public boolean needsItemBuilder(ItemBuilder itemBuilder, PreviewProperties properties){
+        return itemBuilder instanceof NodeBuilder && properties.getBooleanValue(ENABLE_NODE_GLOW);
     }
 }

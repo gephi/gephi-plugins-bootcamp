@@ -42,13 +42,11 @@ Portions Copyrighted 2011 Gephi Consortium.
 package org.gephi.plugins.example.preview;
 
 import java.awt.Color;
-import org.gephi.preview.api.Item;
-import org.gephi.preview.api.PreviewModel;
-import org.gephi.preview.api.PreviewProperties;
-import org.gephi.preview.api.PreviewProperty;
-import org.gephi.preview.api.RenderTarget;
+import org.gephi.preview.api.*;
+import org.gephi.preview.plugin.builders.NodeBuilder;
 import org.gephi.preview.plugin.items.EdgeItem;
 import org.gephi.preview.plugin.renderers.EdgeRenderer;
+import org.gephi.preview.spi.ItemBuilder;
 import org.gephi.preview.spi.Renderer;
 import org.openide.util.NbBundle;
 import org.openide.util.lookup.ServiceProvider;
@@ -139,6 +137,11 @@ public class HighlighMutualEdges implements Renderer {
 
     @Override
     public boolean isRendererForitem(Item item, PreviewProperties pp) {
+        return false;
+    }
+    
+    @Override
+    public boolean needsItemBuilder(ItemBuilder itemBuilder, PreviewProperties properties){
         return false;
     }
 }

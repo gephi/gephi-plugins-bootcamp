@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.ui.filters.plugin">
-    <module_version install_time="1332519441320" last="true" origin="installer" specification_version="0.8.0.6">
+    <module_version install_time="1332790475735" last="true" origin="installer" specification_version="0.8.0.6">
         <file crc="3692104799" name="config/Modules/org-gephi-ui-filters-plugin.xml"/>
-        <file crc="3276947075" name="modules/org-gephi-ui-filters-plugin.jar"/>
+        <file crc="303880917" name="modules/org-gephi-ui-filters-plugin.jar"/>
     </module_version>
 </module>

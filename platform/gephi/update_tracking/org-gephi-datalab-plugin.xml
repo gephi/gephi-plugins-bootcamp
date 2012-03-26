@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.datalab.plugin">
-    <module_version install_time="1332519447196" last="true" origin="installer" specification_version="0.8.0.9">
+    <module_version install_time="1332790482133" last="true" origin="installer" specification_version="0.8.0.9">
         <file crc="4242634335" name="config/Modules/org-gephi-datalab-plugin.xml"/>
-        <file crc="1915309830" name="modules/org-gephi-datalab-plugin.jar"/>
+        <file crc="505403474" name="modules/org-gephi-datalab-plugin.jar"/>
     </module_version>
 </module>

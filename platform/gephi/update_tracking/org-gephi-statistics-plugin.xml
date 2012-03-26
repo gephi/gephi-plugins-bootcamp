@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.statistics.plugin">
-    <module_version install_time="1332519437184" last="true" origin="installer" specification_version="0.8.0.6">
+    <module_version install_time="1332790471228" last="true" origin="installer" specification_version="0.8.0.6">
         <file crc="3767285076" name="config/Modules/org-gephi-statistics-plugin.xml"/>
-        <file crc="1247661540" name="modules/org-gephi-statistics-plugin.jar"/>
+        <file crc="1908214167" name="modules/org-gephi-statistics-plugin.jar"/>
     </module_version>
 </module>

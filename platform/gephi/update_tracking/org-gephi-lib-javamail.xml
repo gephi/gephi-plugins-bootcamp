@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.lib.javamail">
-    <module_version install_time="1332519400705" last="true" origin="installer" specification_version="1.0">
+    <module_version install_time="1332790430009" last="true" origin="installer" specification_version="1.0">
         <file crc="1523317817" name="config/Modules/org-gephi-lib-javamail.xml"/>
         <file crc="676735294" name="modules/ext/dsn.jar"/>
         <file crc="1150648552" name="modules/ext/imap.jar"/>
@@ -8,6 +8,6 @@
         <file crc="1903729043" name="modules/ext/mailapi.jar"/>
         <file crc="3492068566" name="modules/ext/pop3.jar"/>
         <file crc="1384902394" name="modules/ext/smtp.jar"/>
-        <file crc="2251420743" name="modules/org-gephi-lib-javamail.jar"/>
+        <file crc="4090701227" name="modules/org-gephi-lib-javamail.jar"/>
     </module_version>
 </module>
