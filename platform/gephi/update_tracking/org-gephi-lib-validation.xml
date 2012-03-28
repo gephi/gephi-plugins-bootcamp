@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.lib.validation">
-    <module_version install_time="1332790433662" last="true" origin="installer" specification_version="0.4">
+    <module_version install_time="1332962115790" last="true" origin="installer" specification_version="0.4">
         <file crc="3837629065" name="config/Modules/org-gephi-lib-validation.xml"/>
         <file crc="10956875" name="modules/ext/ValidationAPI.jar"/>
-        <file crc="508990322" name="modules/org-gephi-lib-validation.jar"/>
+        <file crc="1082337657" name="modules/org-gephi-lib-validation.jar"/>
     </module_version>
 </module>

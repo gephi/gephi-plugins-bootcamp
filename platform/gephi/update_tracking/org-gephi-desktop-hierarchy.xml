@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.desktop.hierarchy">
-    <module_version install_time="1332790485683" last="true" origin="installer" specification_version="0.8.0.1">
+    <module_version install_time="1332962208808" last="true" origin="installer" specification_version="0.8.0.1">
         <file crc="3414264363" name="config/Modules/org-gephi-desktop-hierarchy.xml"/>
-        <file crc="1457184792" name="modules/org-gephi-desktop-hierarchy.jar"/>
+        <file crc="3694156264" name="modules/org-gephi-desktop-hierarchy.jar"/>
     </module_version>
 </module>

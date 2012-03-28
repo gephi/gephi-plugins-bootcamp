@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module codename="org.gephi.lib.jogl">
-    <module_version install_time="1332790431436" last="true" origin="installer" specification_version="1.1.0.3">
+    <module_version install_time="1332962111764" last="true" origin="installer" specification_version="1.1.0.3">
         <file crc="3952647386" name="config/Modules/org-gephi-lib-jogl.xml"/>
         <file crc="1093266141" name="modules/ext/gluegen-rt.jar"/>
         <file crc="602694816" name="modules/ext/jogl.jar"/>
@@ -25,6 +25,6 @@
         <file crc="1494902120" name="modules/lib/windows-i586/jogl.dll"/>
         <file crc="2233592965" name="modules/lib/windows-i586/jogl_awt.dll"/>
         <file crc="3276286261" name="modules/lib/windows-i586/jogl_cg.dll"/>
-        <file crc="1693748107" name="modules/org-gephi-lib-jogl.jar"/>
+        <file crc="2818954757" name="modules/org-gephi-lib-jogl.jar"/>
     </module_version>
 </module>
