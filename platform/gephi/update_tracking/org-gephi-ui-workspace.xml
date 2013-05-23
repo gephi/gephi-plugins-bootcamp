@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.gephi.ui.workspace">
-    <module_version install_time="1332962200245" last="true" origin="installer" specification_version="0.8.1.0">
-        <file crc="1953013193" name="config/Modules/org-gephi-ui-workspace.xml"/>
-        <file crc="1880249898" name="modules/org-gephi-ui-workspace.jar"/>
-    </module_version>
-</module>

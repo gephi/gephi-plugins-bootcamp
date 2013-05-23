@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.gephi.statistics.api">
-    <module_version install_time="1332962135983" last="true" origin="installer" specification_version="0.8.1.1">
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.statistics.api">
+    <module_version install_time="1369289106386" last="true" origin="Ant" specification_version="0.8.2">
         <file crc="1216422488" name="config/Modules/org-gephi-statistics-api.xml"/>
-        <file crc="1192238443" name="modules/org-gephi-statistics-api.jar"/>
+        <file crc="2338462545" name="modules/org-gephi-statistics-api.jar"/>
+        <file crc="1853457218" name="update_tracking/org-gephi-statistics-api.xml"/>
     </module_version>
 </module>

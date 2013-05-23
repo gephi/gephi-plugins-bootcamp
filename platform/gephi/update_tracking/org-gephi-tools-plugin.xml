@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.gephi.tools.plugin">
-    <module_version install_time="1332962204041" last="true" origin="installer" specification_version="0.8.0.5">
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.tools.plugin">
+    <module_version install_time="1369289106944" last="true" origin="Ant" specification_version="0.8.2">
         <file crc="539467068" name="config/Modules/org-gephi-tools-plugin.xml"/>
-        <file crc="2215217597" name="modules/org-gephi-tools-plugin.jar"/>
+        <file crc="328868875" name="modules/org-gephi-tools-plugin.jar"/>
+        <file crc="2732669322" name="update_tracking/org-gephi-tools-plugin.xml"/>
     </module_version>
 </module>

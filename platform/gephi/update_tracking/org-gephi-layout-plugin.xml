@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.gephi.layout.plugin">
-    <module_version install_time="1332962149734" last="true" origin="installer" specification_version="0.8.0.3">
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.layout.plugin">
+    <module_version install_time="1369289088770" last="true" origin="Ant" specification_version="0.8.2">
         <file crc="3896076950" name="config/Modules/org-gephi-layout-plugin.xml"/>
-        <file crc="790873637" name="modules/org-gephi-layout-plugin.jar"/>
+        <file crc="329751569" name="modules/org-gephi-layout-plugin.jar"/>
+        <file crc="2825407496" name="update_tracking/org-gephi-layout-plugin.xml"/>
     </module_version>
 </module>

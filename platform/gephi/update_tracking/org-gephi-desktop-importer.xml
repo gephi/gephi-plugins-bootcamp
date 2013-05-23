@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.gephi.desktop.importer">
-    <module_version install_time="1332962180618" last="true" origin="installer" specification_version="0.8.0.1">
-        <file crc="1712437748" name="config/Modules/org-gephi-desktop-importer.xml"/>
-        <file crc="1857143932" name="modules/org-gephi-desktop-importer.jar"/>
-    </module_version>
-</module>

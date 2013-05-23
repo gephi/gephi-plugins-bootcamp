@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.netbeans.modules.applemenu/1">
-    <module_version install_time="1323292025264" last="true" origin="installer" specification_version="1.22.1">
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.netbeans.modules.applemenu">
+    <module_version install_time="1369289051406" last="true" origin="Ant" specification_version="1.24.1">
+        <file crc="2462276926" name="modules/locale/org-netbeans-modules-applemenu_ja.jar"/>
+        <file crc="224417489" name="modules/locale/org-netbeans-modules-applemenu_pt_BR.jar"/>
+        <file crc="34509408" name="modules/locale/org-netbeans-modules-applemenu_ru.jar"/>
+        <file crc="2134467562" name="modules/locale/org-netbeans-modules-applemenu_zh_CN.jar"/>
         <file crc="2121659589" name="config/Modules/org-netbeans-modules-applemenu.xml"/>
-        <file crc="381813978" name="modules/locale/org-netbeans-modules-applemenu_ja.jar"/>
-        <file crc="1323362223" name="modules/locale/org-netbeans-modules-applemenu_pt_BR.jar"/>
-        <file crc="3398198990" name="modules/locale/org-netbeans-modules-applemenu_ru.jar"/>
-        <file crc="1207316128" name="modules/locale/org-netbeans-modules-applemenu_zh_CN.jar"/>
-        <file crc="3256761027" name="modules/org-netbeans-modules-applemenu.jar"/>
+        <file crc="3835955468" name="modules/org-netbeans-modules-applemenu.jar"/>
     </module_version>
 </module>

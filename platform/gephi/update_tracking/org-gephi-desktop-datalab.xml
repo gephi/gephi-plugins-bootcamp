@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.gephi.desktop.datalab">
-    <module_version install_time="1332962198862" last="true" origin="installer" specification_version="0.8.0.9">
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.desktop.datalab">
+    <module_version install_time="1369289089923" last="true" origin="Ant" specification_version="0.8.2">
         <file crc="4149355920" name="config/Modules/org-gephi-desktop-datalab.xml"/>
-        <file crc="1749104479" name="modules/org-gephi-desktop-datalab.jar"/>
+        <file crc="1882787160" name="modules/org-gephi-desktop-datalab.jar"/>
+        <file crc="550480900" name="update_tracking/org-gephi-desktop-datalab.xml"/>
     </module_version>
 </module>

@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.gephi.graph.dhns">
-    <module_version install_time="1332962155886" last="true" origin="installer" specification_version="0.8.0.5">
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.graph.dhns">
+    <module_version install_time="1369289088045" last="true" origin="Ant" specification_version="0.8.2">
         <file crc="717028660" name="config/Modules/org-gephi-graph-dhns.xml"/>
-        <file crc="3701666246" name="modules/org-gephi-graph-dhns.jar"/>
+        <file crc="2962803346" name="modules/org-gephi-graph-dhns.jar"/>
+        <file crc="2412668655" name="update_tracking/org-gephi-graph-dhns.xml"/>
     </module_version>
 </module>

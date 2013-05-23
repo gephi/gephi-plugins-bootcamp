@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.gephi.desktop.context">
-    <module_version install_time="1332962187675" last="true" origin="installer" specification_version="0.8.0.1">
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.desktop.context">
+    <module_version install_time="1369289109782" last="true" origin="Ant" specification_version="0.8.2">
         <file crc="3990385091" name="config/Modules/org-gephi-desktop-context.xml"/>
-        <file crc="506809215" name="modules/org-gephi-desktop-context.jar"/>
+        <file crc="3229450923" name="modules/org-gephi-desktop-context.jar"/>
+        <file crc="44047799" name="update_tracking/org-gephi-desktop-context.xml"/>
     </module_version>
 </module>

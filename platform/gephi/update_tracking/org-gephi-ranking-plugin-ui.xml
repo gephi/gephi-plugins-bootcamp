@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.ranking.plugin.ui">
+    <module_version install_time="1369289092676" last="true" origin="Ant" specification_version="0.8.2">
+        <file crc="3024017977" name="config/Modules/org-gephi-ranking-plugin-ui.xml"/>
+        <file crc="900929203" name="modules/org-gephi-ranking-plugin-ui.jar"/>
+        <file crc="340834988" name="update_tracking/org-gephi-ranking-plugin-ui.xml"/>
+    </module_version>
+</module>

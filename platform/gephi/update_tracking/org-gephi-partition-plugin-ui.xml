@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.partition.plugin.ui">
+    <module_version install_time="1369289108785" last="true" origin="Ant" specification_version="0.8.2">
+        <file crc="599061273" name="config/Modules/org-gephi-partition-plugin-ui.xml"/>
+        <file crc="3882307404" name="modules/org-gephi-partition-plugin-ui.jar"/>
+        <file crc="2126885165" name="update_tracking/org-gephi-partition-plugin-ui.xml"/>
+    </module_version>
+</module>

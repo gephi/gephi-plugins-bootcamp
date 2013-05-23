@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<module codename="org.netbeans.core.startup/1">
-    <module_version install_time="1323291993316" last="true" origin="installer" specification_version="1.36.1">
-        <file crc="1333316525" name="core/core.jar"/>
-        <file crc="3076156941" name="core/locale/core_ja.jar"/>
-        <file crc="2083825761" name="core/locale/core_pt_BR.jar"/>
-        <file crc="1825327229" name="core/locale/core_ru.jar"/>
-        <file crc="3336440082" name="core/locale/core_zh_CN.jar"/>
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.netbeans.core.startup">
+    <module_version install_time="1369289043679" last="true" origin="Ant" specification_version="1.40.1">
+        <file crc="1952567249" name="core/locale/core_ja.jar"/>
+        <file crc="1415139520" name="core/locale/core_pt_BR.jar"/>
+        <file crc="802195310" name="core/locale/core_ru.jar"/>
+        <file crc="3849346487" name="core/locale/core_zh_CN.jar"/>
+        <file crc="1810911251" name="core/core.jar"/>
     </module_version>
 </module>

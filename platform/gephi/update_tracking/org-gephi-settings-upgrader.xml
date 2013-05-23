@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.settings.upgrader">
+    <module_version install_time="1369289119898" last="true" origin="Ant" specification_version="0.8.2">
+        <file crc="2952869837" name="config/Modules/org-gephi-settings-upgrader.xml"/>
+        <file crc="74523911" name="modules/org-gephi-settings-upgrader.jar"/>
+        <file crc="3065870763" name="update_tracking/org-gephi-settings-upgrader.xml"/>
+    </module_version>
+</module>

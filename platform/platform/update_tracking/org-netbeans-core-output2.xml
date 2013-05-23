@@ -1,19 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<module codename="org.netbeans.core.output2/1">
-    <module_version install_time="1323291958699" last="false" origin="installer" specification_version="1.24.1">
+<?xml version="1.0" encoding="UTF-8"?><module codename="org.netbeans.core.output2">
+    <module_version install_time="1369289012722" last="true" origin="Ant" specification_version="1.26.1">
+        <file crc="1402780680" name="modules/locale/org-netbeans-core-output2_ja.jar"/>
+        <file crc="1793257025" name="modules/locale/org-netbeans-core-output2_pt_BR.jar"/>
+        <file crc="3156362035" name="modules/locale/org-netbeans-core-output2_ru.jar"/>
+        <file crc="2786927733" name="modules/locale/org-netbeans-core-output2_zh_CN.jar"/>
         <file crc="1198063063" name="config/Modules/org-netbeans-core-output2.xml"/>
-        <file crc="3158544050" name="modules/locale/org-netbeans-core-output2_ja.jar"/>
-        <file crc="1087263439" name="modules/locale/org-netbeans-core-output2_pt_BR.jar"/>
-        <file crc="2936896818" name="modules/locale/org-netbeans-core-output2_ru.jar"/>
-        <file crc="2576990284" name="modules/locale/org-netbeans-core-output2_zh_CN.jar"/>
-        <file crc="523837981" name="modules/org-netbeans-core-output2.jar"/>
-    </module_version>
-    <module_version install_time="1331741423876" last="true" origin="NetBeans Distribution" specification_version="1.24.2">
-        <file crc="687645601" name="modules/locale/org-netbeans-core-output2_ja.jar"/>
-        <file crc="418363137" name="modules/locale/org-netbeans-core-output2_pt_BR.jar"/>
-        <file crc="3252342585" name="modules/locale/org-netbeans-core-output2_ru.jar"/>
-        <file crc="2777561972" name="modules/locale/org-netbeans-core-output2_zh_CN.jar"/>
-        <file crc="1198063063" name="config/Modules/org-netbeans-core-output2.xml"/>
-        <file crc="3120755929" name="modules/org-netbeans-core-output2.jar"/>
+        <file crc="2606436139" name="modules/org-netbeans-core-output2.jar"/>
     </module_version>
 </module>
