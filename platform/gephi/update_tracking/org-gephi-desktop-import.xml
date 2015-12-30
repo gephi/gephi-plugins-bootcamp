@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.desktop.import">
-    <module_version install_time="1369289119000" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="895662031" name="config/Modules/org-gephi-desktop-import.xml"/>
-        <file crc="1369485905" name="modules/org-gephi-desktop-import.jar"/>
-        <file crc="1020799182" name="update_tracking/org-gephi-desktop-import.xml"/>
-    </module_version>
-</module>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.algorithms.plugin">
-    <module_version install_time="1369289108981" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="1773474151" name="config/Modules/org-gephi-algorithms-plugin.xml"/>
-        <file crc="3014395117" name="modules/org-gephi-algorithms-plugin.jar"/>
-        <file crc="2290971239" name="update_tracking/org-gephi-algorithms-plugin.xml"/>
-    </module_version>
-</module>

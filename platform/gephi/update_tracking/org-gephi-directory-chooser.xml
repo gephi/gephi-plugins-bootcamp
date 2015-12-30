@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.directory.chooser">
-    <module_version install_time="1369289131809" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="4111831465" name="config/Modules/org-gephi-directory-chooser.xml"/>
-        <file crc="1481222873" name="modules/org-gephi-directory-chooser.jar"/>
-        <file crc="1799602706" name="update_tracking/org-gephi-directory-chooser.xml"/>
-    </module_version>
-</module>

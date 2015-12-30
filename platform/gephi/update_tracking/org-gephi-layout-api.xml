@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.layout.api">
-    <module_version install_time="1369289084578" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="44433397" name="config/Modules/org-gephi-layout-api.xml"/>
-        <file crc="2658539857" name="modules/org-gephi-layout-api.jar"/>
-        <file crc="2259836595" name="update_tracking/org-gephi-layout-api.xml"/>
-    </module_version>
-</module>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.desktop.hierarchy">
-    <module_version install_time="1369289090563" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="3414264363" name="config/Modules/org-gephi-desktop-hierarchy.xml"/>
-        <file crc="4047894445" name="modules/org-gephi-desktop-hierarchy.jar"/>
-        <file crc="3446677994" name="update_tracking/org-gephi-desktop-hierarchy.xml"/>
-    </module_version>
-</module>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.ui.propertyeditor">
-    <module_version install_time="1369289088987" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="1873382394" name="config/Modules/org-gephi-ui-propertyeditor.xml"/>
-        <file crc="3725272034" name="modules/org-gephi-ui-propertyeditor.jar"/>
-        <file crc="1866559675" name="update_tracking/org-gephi-ui-propertyeditor.xml"/>
-    </module_version>
-</module>

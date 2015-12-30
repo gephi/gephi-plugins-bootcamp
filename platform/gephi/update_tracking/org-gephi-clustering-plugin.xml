@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.clustering.plugin">
-    <module_version install_time="1369289112065" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="3970311722" name="config/Modules/org-gephi-clustering-plugin.xml"/>
-        <file crc="1537935742" name="modules/org-gephi-clustering-plugin.jar"/>
-        <file crc="3513750852" name="update_tracking/org-gephi-clustering-plugin.xml"/>
-    </module_version>
-</module>

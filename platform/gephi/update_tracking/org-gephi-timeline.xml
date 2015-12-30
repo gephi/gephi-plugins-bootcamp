@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.timeline">
-    <module_version install_time="1369289090780" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="3574812244" name="config/Modules/org-gephi-timeline.xml"/>
-        <file crc="1008631726" name="modules/org-gephi-timeline.jar"/>
-        <file crc="923329679" name="update_tracking/org-gephi-timeline.xml"/>
-    </module_version>
-</module>

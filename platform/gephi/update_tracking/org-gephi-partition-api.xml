@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.partition.api">
-    <module_version install_time="1369289121837" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="1739456535" name="config/Modules/org-gephi-partition-api.xml"/>
-        <file crc="3962852585" name="modules/org-gephi-partition-api.jar"/>
-        <file crc="3188771188" name="update_tracking/org-gephi-partition-api.xml"/>
-    </module_version>
-</module>

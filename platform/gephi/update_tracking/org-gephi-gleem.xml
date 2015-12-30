@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.gleem">
-    <module_version install_time="1369289118630" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="2537265372" name="config/Modules/org-gephi-gleem.xml"/>
-        <file crc="3399297664" name="modules/org-gephi-gleem.jar"/>
-        <file crc="1676010368" name="update_tracking/org-gephi-gleem.xml"/>
-    </module_version>
-</module>

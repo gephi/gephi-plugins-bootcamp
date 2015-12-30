@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.io.exporter.api">
-    <module_version install_time="1369289092886" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="250313852" name="config/Modules/org-gephi-io-exporter-api.xml"/>
-        <file crc="383414734" name="modules/org-gephi-io-exporter-api.jar"/>
-        <file crc="1086442181" name="update_tracking/org-gephi-io-exporter-api.xml"/>
-    </module_version>
-</module>

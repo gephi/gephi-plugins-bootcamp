@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.desktop.filters">
-    <module_version install_time="1369289111828" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="4055629108" name="config/Modules/org-gephi-desktop-filters.xml"/>
-        <file crc="3118598497" name="modules/org-gephi-desktop-filters.jar"/>
-        <file crc="340289571" name="update_tracking/org-gephi-desktop-filters.xml"/>
-    </module_version>
-</module>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.desktop.tools">
-    <module_version install_time="1369289089218" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="1423726154" name="config/Modules/org-gephi-desktop-tools.xml"/>
-        <file crc="3428015247" name="modules/org-gephi-desktop-tools.jar"/>
-        <file crc="3096604962" name="update_tracking/org-gephi-desktop-tools.xml"/>
-    </module_version>
-</module>

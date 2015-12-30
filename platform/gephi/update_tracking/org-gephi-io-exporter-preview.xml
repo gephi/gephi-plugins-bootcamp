@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><module codename="org.gephi.io.exporter.preview">
-    <module_version install_time="1369289076828" last="true" origin="Ant" specification_version="0.8.2">
-        <file crc="1370871811" name="config/Modules/org-gephi-io-exporter-preview.xml"/>
-        <file crc="938072896" name="modules/org-gephi-io-exporter-preview.jar"/>
-        <file crc="2591452149" name="update_tracking/org-gephi-io-exporter-preview.xml"/>
-    </module_version>
-</module>

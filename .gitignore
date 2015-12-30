@@ -1,6 +1,2 @@
 .DS_Store
-build/**
-**/build
-nbproject/private/**
-dist/**
-**/nbproject/private
+**/target/**

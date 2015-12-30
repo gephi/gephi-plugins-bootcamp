@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>gephi-plugin-parent</artifactId>
+        <groupId>org.gephi</groupId>
+        <version>0.9.0</version>
+    </parent>
+
+    <groupId>org.gephi.plugins.example</groupId>
+    <artifactId>processor</artifactId>
+    <version>1.0.0</version>
+    <packaging>nbm</packaging>
+
+    <name>ProcessorPluginExample</name>
+
+    <dependencies>
+        
+        <dependency>
+            <groupId>org.gephi</groupId>
+            <artifactId>io-processor-plugin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-util-lookup</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.gephi</groupId>
+            <artifactId>io-importer-api</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>nbm-maven-plugin</artifactId>
+                <configuration>
+                    <author>Mathieu Bastian</author>
+                    <licenseName>CDDL</licenseName>
+                    <sourceCodeUrl>http://github.com/gephi/gephi-plugins-bootcamp</sourceCodeUrl>
+                    <homePageUrl>http://github.com/gephi/gephi-plugins-bootcamp</homePageUrl>
+                    <publicPackages>
+                        
+                    </publicPackages>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
