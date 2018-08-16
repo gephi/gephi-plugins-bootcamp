@@ -1,0 +1,6 @@
+#TODO
+
+1. check and validate if the column already exists
+  1a. check whether the column is dynamic
+2. add a column that can accept dynamic or not dynamic value
+  called "weight"

@@ -46,6 +46,7 @@ import org.gephi.graph.api.Edge;
 import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
+import org.gephi.graph.api.Table;
 // import org.gephi.layout.plugin.NodeWeight.ForceFactory.AttractionForce;
 // import org.gephi.layout.plugin.NodeWeight.ForceFactory.RepulsionForce;
 import org.gephi.layout.plugins.layout.NodeWeight.ForceFactory.AttractionForce;
@@ -109,6 +110,11 @@ public class ForceAtlas2 implements Layout {
         speed = 1.;
         speedEfficiency = 1.;
 
+        Table table = graphModel.getNodeTable();
+        table.addColumn("weight", "weight", Double.class, (Double) 0.0);
+
+
+
         graph = graphModel.getGraphVisible();
 
         graph.readLock();
@@ -153,6 +159,13 @@ public class ForceAtlas2 implements Layout {
         }
     }
 
+    // public void addWeightCol(graph){
+    //   graph.addColumn();
+    // }
+
+    // public void switchToDynamic(col){
+    //   return 0;
+    // }
 
     @Override
     public void goAlgo() {
@@ -160,7 +173,13 @@ public class ForceAtlas2 implements Layout {
         if (graphModel == null) {
             return;
         }
+
+        // Table table = graphModel.getNodeTable();
+        // table.addColumn("weight", Double.class);
+
+
         graph = graphModel.getGraphVisible();
+
         graph.readLock();
         boolean isDynamicWeight = graphModel.getEdgeTable().getColumn("weight").isDynamic();
         boolean isDynamicNodeWeight = graphModel.getNodeTable().getColumn("weight").isDynamic();
