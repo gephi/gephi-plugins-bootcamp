@@ -111,7 +111,9 @@ public class ForceAtlas2 implements Layout {
         speedEfficiency = 1.;
 
         Table table = graphModel.getNodeTable();
-        table.addColumn("weight", "weight", Double.class, (Double) 0.0);
+        // table.addColumn("weight", "weight", Double.class, (Double) 0.0);
+        table.addColumn("weight", Double.class);
+
 
 
 
@@ -148,6 +150,14 @@ public class ForceAtlas2 implements Layout {
         } else {
             return edge.getWeight();
         }
+    }
+
+    private boolean hasNodeWeight(Node node) {
+      if (node.getAttribute("weight") != null) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     private double getNodeWeight(Node node, boolean isDynamicNodeWeight, Interval interval) {
@@ -240,7 +250,7 @@ public class ForceAtlas2 implements Layout {
                 }
             }
 //BOOKMARK
-          // Attraction
+        // Attractions (weights)
             // Edge Weight
             AttractionForce Attraction = ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
             if (getEdgeWeightInfluence() == 0) {
@@ -256,16 +266,20 @@ public class ForceAtlas2 implements Layout {
                     Attraction.apply(e.getSource(), e.getTarget(), Math.pow(getEdgeWeight(e, isDynamicWeight, interval), getEdgeWeightInfluence()));
                 }
             }
+
             // Node Weight
             AttractionForce NodeAttraction = ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
             for (Edge e : edges) {
               Node node_a = e.getSource();
               Node node_b = e.getTarget();
 
-              Double wt_a = getNodeWeight(node_a, isDynamicNodeWeight, interval);
-              Double wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval);
+              if (hasNodeWeight(node_a) && hasNodeWeight(node_b)) {
+                Double wt_a = getNodeWeight(node_a, isDynamicNodeWeight, interval);
+                Double wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval);
 
-              NodeAttraction.apply(node_a, node_b, (getNodeWeight(node_a, isDynamicNodeWeight, interval) + getNodeWeight(node_b, isDynamicNodeWeight, interval))/2);
+                NodeAttraction.apply(node_a, node_b, (getNodeWeight(node_a, isDynamicNodeWeight, interval) + getNodeWeight(node_b, isDynamicNodeWeight, interval))/2);
+
+              }
 
 
 
