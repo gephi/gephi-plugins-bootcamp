@@ -111,8 +111,12 @@ public class ForceAtlas2 implements Layout {
         speedEfficiency = 1.;
 
         Table table = graphModel.getNodeTable();
+
+        if (!(table.hasColumn("weight"))) {
+          table.addColumn("weight", Double.class);
+        }
         // table.addColumn("weight", "weight", Double.class, (Double) 0.0);
-        table.addColumn("weight", Double.class);
+        // table.addColumn("weight", Double.class);
 
 
 
@@ -250,7 +254,7 @@ public class ForceAtlas2 implements Layout {
                 }
             }
 //BOOKMARK
-        // Attractions (weights)
+          // Attraction
             // Edge Weight
             AttractionForce Attraction = ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
             if (getEdgeWeightInfluence() == 0) {
@@ -266,8 +270,8 @@ public class ForceAtlas2 implements Layout {
                     Attraction.apply(e.getSource(), e.getTarget(), Math.pow(getEdgeWeight(e, isDynamicWeight, interval), getEdgeWeightInfluence()));
                 }
             }
-
             // Node Weight
+
             AttractionForce NodeAttraction = ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
             for (Edge e : edges) {
               Node node_a = e.getSource();
@@ -391,6 +395,7 @@ public class ForceAtlas2 implements Layout {
             graph.readUnlockAll();
         }
     }
+
 
     @Override
     public boolean canAlgo() {

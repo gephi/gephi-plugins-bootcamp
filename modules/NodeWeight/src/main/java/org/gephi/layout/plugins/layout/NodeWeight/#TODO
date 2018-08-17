@@ -1,6 +1,19 @@
 #TODO
 
-1. check and validate if the column already exists
+To-do:
+1. add hsv transparency
+2. add size change
+3. make the node weight attraction more meaningful
+4. try out many use-cases to test plugin
+5. make good visualizations to be tested
+
+
+
+
+
+
+Done:
+ check and validate if the column already exists
   1a. check whether the column is dynamic
-2. add a column that can accept dynamic or not dynamic value
+ add a column that can accept dynamic or not dynamic value
   called "weight"
