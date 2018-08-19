@@ -173,6 +173,36 @@ public class ForceAtlas2 implements Layout {
         }
     }
 
+
+    private double normalizeNodeWeight(Node node, Double weight) {
+      /**
+      * 1. find the max and min in the column
+      * 2. add to make all numbers positive
+      * 3. divide by ten's place of the new max
+      * 3b. functionality to choose desired max?
+      */
+    }
+
+    private void adjustNodeTransparency(Node node), Double normalized_weight {
+      /**
+      * DO: Adjust transparency based on weight normalization
+      * void  setAlpha(float a)
+      * Sets the alpha (transparency) color component.
+      ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/ElementProperties.html#alpha--
+      */
+    }
+
+    private void adjustNodeSize(Node node, Double normalized_weight) {
+      /**
+      * DO: Adjust size based on weight normalization
+      * void setSize(float size)
+      * Sets the size.
+      * Parameters:
+      * size - the size
+      ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/NodeProperties.html#setSize-float-
+      */
+    }
+
     // public void addWeightCol(graph){
     //   graph.addColumn();
     // }
