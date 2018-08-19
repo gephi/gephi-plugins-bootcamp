@@ -63,6 +63,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import org.gephi.graph.api.Interval;
+
+import org.gephi.graph.api.types.IntervalMap;
+import org.gephi.graph.api.types.TimeMap;
+import org.gephi.graph.api.types.TimestampMap;
 // import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.plugins.layout.NodeWeight.AbstractLayout;
 
@@ -167,7 +171,9 @@ public class ForceAtlas2 implements Layout {
     private double getNodeWeight(Node node, boolean isDynamicNodeWeight, Interval interval) {
         if (isDynamicNodeWeight) {
             // node_weight = (Double) n.getAttribute("gravity_x");
-            return (Double) node.getAttribute("weight", interval);
+            TimestampMap map = (TimestampMap) node.getAttribute("weight");
+            return (Double) map.get(interval, 0);
+
         } else {
             return (Double) node.getAttribute("weight");
         }
