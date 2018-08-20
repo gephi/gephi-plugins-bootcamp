@@ -213,6 +213,7 @@ public class ForceAtlas2 implements Layout {
     private void adjustNodeTransparency(Node node, Double weight) {
       Float normalized_weight = normalizeNodeWeight(node, weight);
       node.setAlpha(normalized_weight);
+      // System.out.println("\"TESTING\"" + String.valueOf(getMinWeight()));
       // /**
       // * DO: Adjust transparency based on weight normalization
       // * void  setAlpha(float a)
