@@ -47,6 +47,10 @@ import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
 import org.gephi.graph.api.Table;
+import org.gephi.graph.api.Estimator;
+import org.gephi.graph.api.types.IntervalMap;
+import org.gephi.graph.api.types.TimeMap;
+import org.gephi.graph.api.types.TimestampMap;
 // import org.gephi.layout.plugin.NodeWeight.ForceFactory.AttractionForce;
 // import org.gephi.layout.plugin.NodeWeight.ForceFactory.RepulsionForce;
 import org.gephi.layout.plugins.layout.NodeWeight.ForceFactory.AttractionForce;
@@ -97,6 +101,8 @@ public class ForceAtlas2 implements Layout {
     private Region rootRegion;
     double outboundAttCompensation = 1;
     private ExecutorService pool;
+    private double minWeight;
+    private double maxWeight;
 
     public ForceAtlas2(ForceAtlas2Builder layoutBuilder) {
         this.layoutBuilder = layoutBuilder;
@@ -165,42 +171,65 @@ public class ForceAtlas2 implements Layout {
     }
 
     private double getNodeWeight(Node node, boolean isDynamicNodeWeight, Interval interval) {
-        if (isDynamicNodeWeight) {
-            // node_weight = (Double) n.getAttribute("gravity_x");
-            return (Double) node.getAttribute("weight", interval);
-        } else {
-            return (Double) node.getAttribute("weight");
-        }
+      if (isDynamicNodeWeight) {
+          // node_weight = (Double) n.getAttribute("gravity_x");
+          TimestampMap map = (TimestampMap) node.getAttribute("weight");
+          // Estimator estimator = (Estimator) AVERAGE;
+          Double prev_value = 0.0;
+          Double value = (Double) map.get(interval, Estimator.AVERAGE);
+          if (value != null) {
+            prev_value = value;
+            return value;
+          } else {
+            return prev_value;
+          }
+
+
+
+      } else {
+          return (Double) node.getAttribute("weight");
+      }
     }
 
 
-    private double normalizeNodeWeight(Node node, Double weight) {
-      /**
-      * 1. find the max and min in the column
-      * 2. add to make all numbers positive
-      * 3. divide by ten's place of the new max
-      * 3b. functionality to choose desired max?
-      */
+    private float normalizeNodeWeight(Node node, Double weight) {
+      double d_weight = weight;
+      double d_max = getMaxWeight();
+      double d_min = getMinWeight();
+      float maxWeight = (float) d_max;
+      float minWeight = (float) d_min;
+      float f_weight = (float) d_weight;
+      Float normalized = (f_weight-minWeight)/(maxWeight-minWeight);
+
+      return normalized;
+      // /**
+      // * 1. find the max and min in the column
+      // * 2. add to make all numbers positive
+      // * 3. divide by ten's place of the new max
+      // * 3b. functionality to choose desired max?
+      // */
     }
 
-    private void adjustNodeTransparency(Node node), Double normalized_weight {
-      /**
-      * DO: Adjust transparency based on weight normalization
-      * void  setAlpha(float a)
-      * Sets the alpha (transparency) color component.
-      ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/ElementProperties.html#alpha--
-      */
+    private void adjustNodeTransparency(Node node, Double weight) {
+      Float normalized_weight = normalizeNodeWeight(node, weight);
+      node.setAlpha(normalized_weight);
+      // /**
+      // * DO: Adjust transparency based on weight normalization
+      // * void  setAlpha(float a)
+      // * Sets the alpha (transparency) color component.
+      // ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/ElementProperties.html#alpha--
+      // */
     }
 
     private void adjustNodeSize(Node node, Double normalized_weight) {
-      /**
-      * DO: Adjust size based on weight normalization
-      * void setSize(float size)
-      * Sets the size.
-      * Parameters:
-      * size - the size
-      ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/NodeProperties.html#setSize-float-
-      */
+      // /**
+      // * DO: Adjust size based on weight normalization
+      // * void setSize(float size)
+      // * Sets the size.
+      // * Parameters:
+      // * size - the size
+      // ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/NodeProperties.html#setSize-float-
+      // */
     }
 
     // public void addWeightCol(graph){
@@ -310,6 +339,9 @@ public class ForceAtlas2 implements Layout {
               if (hasNodeWeight(node_a) && hasNodeWeight(node_b)) {
                 Double wt_a = getNodeWeight(node_a, isDynamicNodeWeight, interval);
                 Double wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval);
+
+                adjustNodeTransparency(node_a, wt_a);
+                adjustNodeTransparency(node_b, wt_b);
 
                 NodeAttraction.apply(node_a, node_b, (getNodeWeight(node_a, isDynamicNodeWeight, interval) + getNodeWeight(node_b, isDynamicNodeWeight, interval))/2);
 
@@ -456,6 +488,20 @@ public class ForceAtlas2 implements Layout {
         final String FORCEATLAS2_THREADS = NbBundle.getMessage(getClass(), "ForceAtlas2.threads");
 
         try {
+            properties.add(LayoutProperty.createProperty(
+                    this, Double.class,
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.maxWeight.name"),
+                    FORCEATLAS2_TUNING,
+                    "ForceAtlas2.maxWeight.name",
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.maxWeight.desc"),
+                    "getMaxWeight", "setMaxWeight"));
+            properties.add(LayoutProperty.createProperty(
+                    this, Double.class,
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.minWeight.name"),
+                    FORCEATLAS2_TUNING,
+                    "ForceAtlas2.minWeight.name",
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.minWeight.desc"),
+                    "getMinWeight", "setMinWeight"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(getClass(), "ForceAtlas2.scalingRatio.name"),
@@ -627,6 +673,22 @@ public class ForceAtlas2 implements Layout {
 
     public void setLinLogMode(Boolean linLogMode) {
         this.linLogMode = linLogMode;
+    }
+
+    public Double getMaxWeight() {
+      return maxWeight;
+    }
+
+    public void setMaxWeight(Double maxWeight) {
+      this.maxWeight = maxWeight;
+    }
+
+    public Double getMinWeight() {
+      return minWeight;
+    }
+
+    public void setMinWeight(Double minWeight) {
+        this.minWeight = minWeight;
     }
 
     public Double getScalingRatio() {
