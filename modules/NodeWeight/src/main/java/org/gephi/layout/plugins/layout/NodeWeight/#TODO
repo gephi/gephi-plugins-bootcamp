@@ -2,14 +2,16 @@
 
 To-do:
 1. add hsv transparency
-2. add size change
+
 3. make the node weight attraction more meaningful
-4. try out many use-cases to test plugin
-5. make good visualizations to be tested
+4. make good visualizations to be tested
+5. Make app more robust (OR CATCH EXCEPTIONS AND TELL USER WHAT TO DO)
 
+  ii. Figure out exception if data in incorrect (non-double) format…. Either be able to handle this or catch exception
 
+  iii. Catch exception if there exists a node weight outside of the provided range
 
-
+6. test some use-cases to see what errors appear
 
 
 Done:
@@ -17,3 +19,6 @@ Done:
   1a. check whether the column is dynamic
  add a column that can accept dynamic or not dynamic value
   called "weight"
+
+    i. Resolve use of weight vs weight_dynamic
+  Check if weight is dynamic; check if dynamic_weight is dynamic; use whichever one exists

@@ -162,33 +162,50 @@ public class ForceAtlas2 implements Layout {
         }
     }
 
-    private boolean hasNodeWeight(Node node) {
-      if (node.getAttribute("weight") != null) {
+    private boolean hasNodeWeightStop(Node node) {
+
+      if (graphModel.getNodeTable().hasColumn("weight") && node.getAttribute("weight") != null) {
         return true;
       } else {
         return false;
       }
     }
 
-    private double getNodeWeight(Node node, boolean isDynamicNodeWeight, Interval interval) {
+    private boolean hasNodeWeightDynamic(Node node) {
+      if (graphModel.getNodeTable().hasColumn("weight_dynamic") && node.getAttribute("weight_dynamic") != null) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    //// DYNAMIC
+    private boolean hasNodeWeight(Node node) {
+      if (hasNodeWeightStop(node) || hasNodeWeightDynamic(node)){
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+
+    private double getNodeWeight(Node node, boolean isDynamicNodeWeight, Interval interval, String column_name) {
       if (isDynamicNodeWeight) {
           // node_weight = (Double) n.getAttribute("gravity_x");
-          TimestampMap map = (TimestampMap) node.getAttribute("weight");
+          TimestampMap map = (TimestampMap) node.getAttribute(column_name);
           // Estimator estimator = (Estimator) AVERAGE;
           Double prev_value = 0.0;
           Double value = (Double) map.get(interval, Estimator.AVERAGE);
-          if (value != null) {
+        if (value != null) {
             prev_value = value;
             return value;
           } else {
             return prev_value;
           }
 
-
-
-      } else {
-          return (Double) node.getAttribute("weight");
-      }
+        } else {
+          return (Double) node.getAttribute(column_name);
+        }
     }
 
 
@@ -222,16 +239,6 @@ public class ForceAtlas2 implements Layout {
       // */
     }
 
-    private void adjustNodeSize(Node node, Double normalized_weight) {
-      // /**
-      // * DO: Adjust size based on weight normalization
-      // * void setSize(float size)
-      // * Sets the size.
-      // * Parameters:
-      // * size - the size
-      // ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/NodeProperties.html#setSize-float-
-      // */
-    }
 
     // public void addWeightCol(graph){
     //   graph.addColumn();
@@ -256,7 +263,22 @@ public class ForceAtlas2 implements Layout {
 
         graph.readLock();
         boolean isDynamicWeight = graphModel.getEdgeTable().getColumn("weight").isDynamic();
-        boolean isDynamicNodeWeight = graphModel.getNodeTable().getColumn("weight").isDynamic();
+        // to-do: make compatible with weight_dynamic
+        // provide exception catch otherwise
+        // boolean isDynamicNodeWeight = graphModel.getNodeTable().getColumn("weight").isDynamic();
+        boolean isDynamicNodeWeight = false;
+
+        Table node_table = graphModel.getNodeTable();
+        if (node_table.hasColumn("weight") && node_table.getColumn("weight").isDynamic()){
+          isDynamicNodeWeight = true;
+        } else if (node_table.hasColumn("weight_dynamic") && node_table.getColumn("weight_dynamic").isDynamic()){
+          isDynamicNodeWeight = true;
+        }
+
+
+
+
+
         Interval interval = graph.getView().getTimeInterval();
 
         try {
@@ -313,7 +335,7 @@ public class ForceAtlas2 implements Layout {
                     throw new RuntimeException("Unable to layout " + this.getClass().getSimpleName() + ".", e);
                 }
             }
-//BOOKMARK
+
           // Attraction
             // Edge Weight
             AttractionForce Attraction = ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
@@ -338,15 +360,28 @@ public class ForceAtlas2 implements Layout {
               Node node_b = e.getTarget();
 
               if (hasNodeWeight(node_a) && hasNodeWeight(node_b)) {
-                Double wt_a = getNodeWeight(node_a, isDynamicNodeWeight, interval);
-                Double wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval);
+                Double wt_a = 0.0;
+                Double wt_b = 0.0;
+                if (hasNodeWeightStop(node_a) && hasNodeWeightStop(node_b)) {
+
+                  wt_a = getNodeWeight(node_a, isDynamicNodeWeight, interval, "weight");
+                  wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval, "weight");
+
+                }
+
+                if (hasNodeWeightDynamic(node_a) && hasNodeWeightDynamic(node_b)) {
+
+                  wt_a = getNodeWeight(node_a, isDynamicNodeWeight, interval, "weight_dynamic");
+                  wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval, "weight_dynamic");
+
+                }
 
                 adjustNodeTransparency(node_a, wt_a);
                 adjustNodeTransparency(node_b, wt_b);
 
-                NodeAttraction.apply(node_a, node_b, (getNodeWeight(node_a, isDynamicNodeWeight, interval) + getNodeWeight(node_b, isDynamicNodeWeight, interval))/2);
+                NodeAttraction.apply(node_a, node_b, ((wt_a + wt_b)/2));
 
-              }
+            }
 
 
 
