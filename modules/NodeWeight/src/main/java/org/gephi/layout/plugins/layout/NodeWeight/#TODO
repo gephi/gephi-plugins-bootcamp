@@ -1,8 +1,8 @@
 #TODO
 
 To-do:
-1. add hsv transparency
-
+1. add transparency for nodes based on weight
+2. make transparency for nodes optional
 3. make the node weight attraction more meaningful
 4. make good visualizations to be tested
 5. Make app more robust (OR CATCH EXCEPTIONS AND TELL USER WHAT TO DO)
