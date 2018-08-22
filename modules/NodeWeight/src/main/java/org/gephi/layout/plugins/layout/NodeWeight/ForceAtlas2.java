@@ -49,10 +49,14 @@ import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
 import org.gephi.graph.api.Table;
 import org.gephi.graph.api.Estimator;
+import org.gephi.graph.api.Interval;
 import org.gephi.graph.api.types.IntervalMap;
 import org.gephi.graph.api.types.TimeMap;
 import org.gephi.graph.api.types.TimestampMap;
 import org.gephi.graph.api.types.TimestampDoubleMap;
+
+
+
 // import org.gephi.layout.plugin.NodeWeight.ForceFactory.AttractionForce;
 // import org.gephi.layout.plugin.NodeWeight.ForceFactory.RepulsionForce;
 import org.gephi.layout.plugins.layout.NodeWeight.ForceFactory.AttractionForce;
@@ -61,6 +65,7 @@ import org.gephi.layout.plugins.layout.NodeWeight.ForceFactory.RepulsionForce;
 import org.gephi.layout.spi.Layout;
 import org.gephi.layout.spi.LayoutBuilder;
 import org.gephi.layout.spi.LayoutProperty;
+
 
 
 import java.util.ArrayList;
@@ -76,10 +81,15 @@ import org.gephi.graph.api.Interval;
 
 // import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.plugins.layout.NodeWeight.AbstractLayout;
+=======
+
+
+>>>>>>> 32ef5fb6b2f878598a4894a4849029b11e9e1a36
 
 
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+
 
 /**
  * ForceAtlas 2 Layout, manages each step of the computations.
@@ -196,19 +206,20 @@ public class ForceAtlas2 implements Layout {
     }
 
 
-    private double getNodeWeight(Node node, boolean isDynamicNodeWeight, Interval interval, String column_name) {
-      if (isDynamicNodeWeight) {
-          // node_weight = (Double) n.getAttribute("gravity_x");
-          TimestampMap map = (TimestampMap) node.getAttribute(column_name);
-          // Estimator estimator = (Estimator) AVERAGE;
-          Double prev_value = 0.0;
-          Double value = (Double) map.get(interval, Estimator.AVERAGE);
-        if (value != null) {
-            prev_value = value;
-            return value;
-          } else {
-            return prev_value;
-          }
+
+    private double getNodeWeight(Node node, boolean isDynamicNodeWeight, Interval interval) {
+        if (isDynamicNodeWeight) {
+            // node_weight = (Double) n.getAttribute("gravity_x");
+            TimestampMap map = (TimestampMap) node.getAttribute("weight");
+            // Estimator estimator = (Estimator) AVERAGE;
+            Double prev_value = 0.0;
+            Double value = (Double) map.get(interval, Estimator.AVERAGE);
+            if (value != null) {
+              prev_value = value;
+              return value;
+            } else {
+              return prev_value;
+            }
 
         } else {
           return (Double) node.getAttribute(column_name);
