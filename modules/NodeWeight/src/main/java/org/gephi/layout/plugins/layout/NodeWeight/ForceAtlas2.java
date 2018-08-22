@@ -43,6 +43,7 @@ package org.gephi.layout.plugins.layout.NodeWeight;
 // org.gephi.layout.plugins.layout.NodeWeight
 
 import org.gephi.graph.api.Edge;
+import org.gephi.graph.api.Element;
 import org.gephi.graph.api.Graph;
 import org.gephi.graph.api.GraphModel;
 import org.gephi.graph.api.Node;
@@ -51,6 +52,7 @@ import org.gephi.graph.api.Estimator;
 import org.gephi.graph.api.types.IntervalMap;
 import org.gephi.graph.api.types.TimeMap;
 import org.gephi.graph.api.types.TimestampMap;
+import org.gephi.graph.api.types.TimestampDoubleMap;
 // import org.gephi.layout.plugin.NodeWeight.ForceFactory.AttractionForce;
 // import org.gephi.layout.plugin.NodeWeight.ForceFactory.RepulsionForce;
 import org.gephi.layout.plugins.layout.NodeWeight.ForceFactory.AttractionForce;
@@ -66,7 +68,12 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.Comparator;
+import java.util.Map;
+
+
 import org.gephi.graph.api.Interval;
+
 // import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.plugins.layout.NodeWeight.AbstractLayout;
 
@@ -208,36 +215,161 @@ public class ForceAtlas2 implements Layout {
         }
     }
 
+// public <T> T min(Collection<T> c, Comparator<T> comp) {
+// if ((c == null) || (comp == null)) {
+//      throw new IllegalArgumentException();
+//   }
 
-    private float normalizeNodeWeight(Node node, Double weight) {
-      double d_weight = weight;
-      double d_max = getMaxWeight();
-      double d_min = getMinWeight();
-      float maxWeight = (float) d_max;
-      float minWeight = (float) d_min;
-      float f_weight = (float) d_weight;
-      Float normalized = (f_weight-minWeight)/(maxWeight-minWeight);
+//   if (c.isEmpty() == true) {
+//      throw new NoSuchElementException();
+//   }
 
-      return normalized;
-      // /**
-      // * 1. find the max and min in the column
-      // * 2. add to make all numbers positive
-      // * 3. divide by ten's place of the new max
-      // * 3b. functionality to choose desired max?
-      // */
-    }
 
-    private void adjustNodeTransparency(Node node, Double weight) {
-      Float normalized_weight = normalizeNodeWeight(node, weight);
-      node.setAlpha(normalized_weight);
-      // System.out.println("\"TESTING\"" + String.valueOf(getMinWeight()));
-      // /**
-      // * DO: Adjust transparency based on weight normalization
-      // * void  setAlpha(float a)
-      // * Sets the alpha (transparency) color component.
-      // ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/ElementProperties.html#alpha--
-      // */
-    }
+ // Iterator itr = c.iterator();
+ // T min = (T)itr.next();
+ // T value;
+ // while (itr.hasNext()) {
+ //      value=(T)itr.next();
+ //      if (comp.compare(min, value) < 0) {
+ //         min = value;
+ //      }
+ // }
+//   return min;
+      private double weightMin(Node[] nodes, String column_name) {
+        Double[] minima;
+        Double min;
+
+        // seed min value from data
+        TimestampDoubleMap seed_map = (TimestampDoubleMap) nodes[0].getAttribute(column_name);
+        double[] seed_weights = seed_map.toDoubleArray();
+        min = seed_weights[0];
+
+        for (Node n: nodes) {
+          TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(column_name);
+          double[] weights = map.toDoubleArray();
+
+          for (Double wt: weights) {
+            if (wt < min) {
+              min = wt;
+            }
+
+          }
+        }
+        return min;
+      }
+  //   private void weightMin(String column_name) {
+  //     Table nodeTable = graphModel.getNodeTable();
+  //     Float value;
+  //     ArrayList<Float> local_minima = new ArrayList<Float>();
+
+  //     if (nodeTable.hasColumn("weight")) {
+  //       // Iterable<Map.Entry> weight_list = getAttributes(nodeTable.getColumn("weight"));
+  //       for () {
+  //         Iterable<Map.Entry> weight_list = n.getAttributes(nodeTable.getColumn("weight"));
+  //         Iterator<Map.Entry> iter = weight_list.iterator();
+
+  //         Map.Entry next = (Map.Entry) iter.next();
+  //         float min = (float) next.getValue();
+
+  //         while (iter.hasNext()) {
+  //           value = (float) iter.next().getValue();
+  //           if (value.compareTo(min) < 0) {
+  //             local_minima.add(value);
+  //           }
+  //           // if (comp.compare(min, value) < 0) {
+  //           //   min = value;
+  //           // }
+  //         }
+  //     }
+
+  //   }
+
+  //   return Collections.min(local_minima);
+  // }
+
+    // private void weightMin(String column_name) {
+    //   Table nodeTable = graphModel.getNodeTable();
+    //   Float value;
+    //   if (nodeTable.hasColumn("weight")) {
+    //     // Iterable<Map.Entry> weight_list = getAttributes(nodeTable.getColumn("weight"));
+    //     for Nodes: n {
+
+    //     }
+    //     Iterable<Map.Entry> weight_list = nodeTable.getAttributes(nodeTable.getColumn("weight"));
+
+    //     Iterator<Map.Entry> iter = weight_list.iterator();
+
+    //     Map.Entry next = (Map.Entry) iter.next();
+    //     float min = (float) next.getValue();
+
+    //     while (iter.hasNext()) {
+    //       value = (float) iter.next().getValue();
+    //       if (value.compareTo(min) < 0) {
+    //         min = value;
+    //       }
+    //       // if (comp.compare(min, value) < 0) {
+    //       //   min = value;
+    //       // }
+    //     }
+    //   return min;
+    //   } else {
+    //     return 0;
+    //   }
+    // }
+
+    // private void weightMax(String column_name){
+
+    // }
+
+
+
+    // }
+    // private void getColumnMin(Column column) {
+
+    // }
+
+    // private void getColumnMax(Column column) {
+
+    // }
+
+
+    // private float normalizeNodeWeight(Node node, Double weight) {
+    //   double d_weight = weight;
+    //   double d_max = getMaxWeight();
+    //   double d_min = getMinWeight();
+    //   float maxWeight = (float) d_max;
+    //   float minWeight = (float) d_min;
+    //   float f_weight = (float) d_weight;
+    //   Float normalized = (f_weight-minWeight)/(maxWeight-minWeight);
+
+    //   return normalized;
+    //   // /**
+    //   // * 1. find the max and min in the column
+    //   // * 2. add to make all numbers positive
+    //   // * 3. divide by ten's place of the new max
+    //   // * 3b. functionality to choose desired max?
+    //   // */
+    // }
+
+    // private void adjustNodeTransparency(Node node, Double weight) {
+    //   Float normalized_weight = normalizeNodeWeight(node, weight);
+    //   node.setAlpha(normalized_weight);
+    //   // System.out.println("\"TESTING\"" + String.valueOf(getMinWeight()));
+    //   // /**
+    //   // * DO: Adjust transparency based on weight normalization
+    //   // * void  setAlpha(float a)
+    //   // * Sets the alpha (transparency) color component.
+    //   // ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/ElementProperties.html#alpha--
+    //   // */
+    // }
+
+
+
+    // private void heatMapNodeWeight(Node node, Double weight) {
+    //   getColumn
+
+    //   float hue = (float) ((weight-0)/(0.66-0))
+    // }
 
 
     // public void addWeightCol(graph){
@@ -375,9 +507,6 @@ public class ForceAtlas2 implements Layout {
                   wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval, "weight_dynamic");
 
                 }
-
-                adjustNodeTransparency(node_a, wt_a);
-                adjustNodeTransparency(node_b, wt_b);
 
                 NodeAttraction.apply(node_a, node_b, ((wt_a + wt_b)/2));
 
