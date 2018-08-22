@@ -236,7 +236,6 @@ public class ForceAtlas2 implements Layout {
  // }
 //   return min;
       private double weightMin(Node[] nodes, String column_name) {
-        Double[] minima;
         Double min;
 
         // seed min value from data
@@ -257,6 +256,29 @@ public class ForceAtlas2 implements Layout {
         }
         return min;
       }
+
+      private double weightMax(Node[] nodes, String column_name) {
+        Double max;
+
+        // seed min value from data
+        TimestampDoubleMap seed_map = (TimestampDoubleMap) nodes[0].getAttribute(column_name);
+        double[] seed_weights = seed_map.toDoubleArray();
+        max = seed_weights[0];
+
+        for (Node n: nodes) {
+          TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(column_name);
+          double[] weights = map.toDoubleArray();
+
+          for (Double wt: weights) {
+            if (wt > max) {
+              max = wt;
+            }
+
+          }
+        }
+        return max;
+      }
+
   //   private void weightMin(String column_name) {
   //     Table nodeTable = graphModel.getNodeTable();
   //     Float value;
