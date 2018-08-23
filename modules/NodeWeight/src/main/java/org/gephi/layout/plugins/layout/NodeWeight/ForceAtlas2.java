@@ -40,6 +40,7 @@
  Portions Copyrighted 2011 Gephi Consortium.
  */
 package org.gephi.layout.plugins.layout.NodeWeight;
+import java.awt.Color;
 // org.gephi.layout.plugins.layout.NodeWeight
 
 import org.gephi.graph.api.Edge;
@@ -77,18 +78,19 @@ import java.util.Comparator;
 import java.util.Map;
 
 
+
 import org.gephi.graph.api.Interval;
 
 // import org.gephi.layout.plugin.AbstractLayout;
 import org.gephi.layout.plugins.layout.NodeWeight.AbstractLayout;
-=======
 
 
->>>>>>> 32ef5fb6b2f878598a4894a4849029b11e9e1a36
 
 
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
+
+
 
 
 /**
@@ -120,6 +122,21 @@ public class ForceAtlas2 implements Layout {
     private ExecutorService pool;
     private double minWeight;
     private double maxWeight;
+    private String nodeWeightColumnName;
+
+
+
+    private void setNodeWeightColumnName(Table table) {
+      if (table.hasColumn("weight")) {
+        this.nodeWeightColumnName = "weight";
+      }
+      // weight_dynamic
+      if (table.hasColumn("weight_dynamic")) {
+        this.nodeWeightColumnName = "weight_dynamic";
+      }
+    }
+
+
 
     public ForceAtlas2(ForceAtlas2Builder layoutBuilder) {
         this.layoutBuilder = layoutBuilder;
@@ -135,11 +152,23 @@ public class ForceAtlas2 implements Layout {
 
         Table table = graphModel.getNodeTable();
 
-        if (!(table.hasColumn("weight"))) {
+
+        if (!(table.hasColumn("weight") || table.hasColumn("weight_dynamic"))) {
           table.addColumn("weight", Double.class);
         }
-        // table.addColumn("weight", "weight", Double.class, (Double) 0.0);
-        // table.addColumn("weight", Double.class);
+
+        setNodeWeightColumnName(table);
+
+        if (!(table.getColumn(nodeWeightColumnName).getTypeClass()==Double.class || (table.getColumn(nodeWeightColumnName).getTypeClass()==TimestampDoubleMap.class))) {
+          // try {
+          //           future.get();
+          //       } catch (Exception e) {
+          //           throw new RuntimeException("Unable to layout " + this.getClass().getSimpleName() + ".", e);
+          //       }
+
+
+          //alert the user that need type double and abort algorithm
+        }
 
 
 
@@ -170,6 +199,23 @@ public class ForceAtlas2 implements Layout {
             graph.readUnlockAll();
         }
     }
+
+    public static int[] calcHistogram(double[] data, double min, double max, int numBins) {
+      final int[] result = new int[numBins];
+      final double binSize = (max - min)/numBins;
+
+      for (double d : data) {
+        int bin = (int) ((d - min) / binSize);
+        if (bin < 0) { /* this data is smaller than min */ }
+        else if (bin >= numBins) { /* this data point is bigger than max */ }
+        else {
+          result[bin] += 1;
+        }
+      }
+      return result;
+    }
+
+
 
     private double getEdgeWeight(Edge edge, boolean isDynamicWeight, Interval interval) {
         if (isDynamicWeight) {
@@ -210,7 +256,7 @@ public class ForceAtlas2 implements Layout {
     private double getNodeWeight(Node node, boolean isDynamicNodeWeight, Interval interval) {
         if (isDynamicNodeWeight) {
             // node_weight = (Double) n.getAttribute("gravity_x");
-            TimestampMap map = (TimestampMap) node.getAttribute("weight");
+            TimestampMap map = (TimestampMap) node.getAttribute(this.nodeWeightColumnName);
             // Estimator estimator = (Estimator) AVERAGE;
             Double prev_value = 0.0;
             Double value = (Double) map.get(interval, Estimator.AVERAGE);
@@ -222,55 +268,41 @@ public class ForceAtlas2 implements Layout {
             }
 
         } else {
-          return (Double) node.getAttribute(column_name);
+          return (Double) node.getAttribute(this.nodeWeightColumnName);
         }
     }
 
-// public <T> T min(Collection<T> c, Comparator<T> comp) {
-// if ((c == null) || (comp == null)) {
-//      throw new IllegalArgumentException();
-//   }
 
-//   if (c.isEmpty() == true) {
-//      throw new NoSuchElementException();
-//   }
+    private void setterMinWeight(Node[] nodes) {
+      Double min;
 
+      // seed min value from data
+      TimestampDoubleMap seed_map = (TimestampDoubleMap) nodes[0].getAttribute(this.nodeWeightColumnName);
+      double[] seed_weights = seed_map.toDoubleArray();
+      min = seed_weights[0];
 
- // Iterator itr = c.iterator();
- // T min = (T)itr.next();
- // T value;
- // while (itr.hasNext()) {
- //      value=(T)itr.next();
- //      if (comp.compare(min, value) < 0) {
- //         min = value;
- //      }
- // }
-//   return min;
-      private double weightMin(Node[] nodes, String column_name) {
-        Double min;
+      for (Node n: nodes) {
+        TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(this.nodeWeightColumnName);
+        double[] weights = map.toDoubleArray();
 
-        // seed min value from data
-        TimestampDoubleMap seed_map = (TimestampDoubleMap) nodes[0].getAttribute(column_name);
-        double[] seed_weights = seed_map.toDoubleArray();
-        min = seed_weights[0];
-
-        for (Node n: nodes) {
-          TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(column_name);
-          double[] weights = map.toDoubleArray();
-
-          for (Double wt: weights) {
-            if (wt < min) {
-              min = wt;
-            }
-
+        for (Double wt: weights) {
+          if (wt < min) {
+            min = wt;
           }
+
         }
-        return min;
       }
+      // System.out.println("");
+      // System.out.println("----------------------------");
+      // System.out.println("MIN: " +  min );
+      // System.out.println("----------------------------");
+      // System.out.println("");
+      this.minWeight = min;
+    }
 
-      private double weightMax(Node[] nodes, String column_name) {
+    private void setterMaxWeight(Node[] nodes) {
         Double max;
-
+        String column_name = this.nodeWeightColumnName;
         // seed min value from data
         TimestampDoubleMap seed_map = (TimestampDoubleMap) nodes[0].getAttribute(column_name);
         double[] seed_weights = seed_map.toDoubleArray();
@@ -287,131 +319,43 @@ public class ForceAtlas2 implements Layout {
 
           }
         }
-        return max;
-      }
+        // System.out.println("");
+        // System.out.println("----------------------------");
+        // System.out.println("MAX: " +  max );
+        // System.out.println("----------------------------");
+        // System.out.println("");
+        this.maxWeight = max;
+    }
 
-  //   private void weightMin(String column_name) {
-  //     Table nodeTable = graphModel.getNodeTable();
-  //     Float value;
-  //     ArrayList<Float> local_minima = new ArrayList<Float>();
+    private void adjustHue(Node[] nodes, Node node, Double weight){
+        // Double min = getMinWeight(nodes);
+        // Double max = getMaxWeight(nodes);
 
-  //     if (nodeTable.hasColumn("weight")) {
-  //       // Iterable<Map.Entry> weight_list = getAttributes(nodeTable.getColumn("weight"));
-  //       for () {
-  //         Iterable<Map.Entry> weight_list = n.getAttributes(nodeTable.getColumn("weight"));
-  //         Iterator<Map.Entry> iter = weight_list.iterator();
+        Double min = this.minWeight;
+        System.out.println("");
+        System.out.println("----------------------------");
+        System.out.println("MIN: " +  min );
+        System.out.println("----------------------------");
+        System.out.println("");
+        Double max = this.maxWeight;
+        System.out.println("");
+        System.out.println("----------------------------");
+        System.out.println("MAX: " +  max );
+        System.out.println("----------------------------");
+        System.out.println("");
 
-  //         Map.Entry next = (Map.Entry) iter.next();
-  //         float min = (float) next.getValue();
-
-  //         while (iter.hasNext()) {
-  //           value = (float) iter.next().getValue();
-  //           if (value.compareTo(min) < 0) {
-  //             local_minima.add(value);
-  //           }
-  //           // if (comp.compare(min, value) < 0) {
-  //           //   min = value;
-  //           // }
-  //         }
-  //     }
-
-  //   }
-
-  //   return Collections.min(local_minima);
-  // }
-
-    // private void weightMin(String column_name) {
-    //   Table nodeTable = graphModel.getNodeTable();
-    //   Float value;
-    //   if (nodeTable.hasColumn("weight")) {
-    //     // Iterable<Map.Entry> weight_list = getAttributes(nodeTable.getColumn("weight"));
-    //     for Nodes: n {
-
-    //     }
-    //     Iterable<Map.Entry> weight_list = nodeTable.getAttributes(nodeTable.getColumn("weight"));
-
-    //     Iterator<Map.Entry> iter = weight_list.iterator();
-
-    //     Map.Entry next = (Map.Entry) iter.next();
-    //     float min = (float) next.getValue();
-
-    //     while (iter.hasNext()) {
-    //       value = (float) iter.next().getValue();
-    //       if (value.compareTo(min) < 0) {
-    //         min = value;
-    //       }
-    //       // if (comp.compare(min, value) < 0) {
-    //       //   min = value;
-    //       // }
-    //     }
-    //   return min;
-    //   } else {
-    //     return 0;
-    //   }
-    // }
-
-    // private void weightMax(String column_name){
-
-    // }
+        // scale weights to lie between 0 and 0.66
+        double hue_double = (double)(((weight - min)/(max - min))*(0.66-0.0) + 0.0);
+        //node.getNodeData().setColor(float r, float g, float b)
+        float hue_float = (float) hue_double;
+        float s = 1.0f;
+        float b = 1.0f;
+        Color new_color = Color.getHSBColor(hue_float, s, b);
+        node.setColor(new_color);
+//Converts the components of a color, as specified by the HSB model, to an equivalent set of values for the default RGB model.
+    }
 
 
-
-    // }
-    // private void getColumnMin(Column column) {
-
-    // }
-
-    // private void getColumnMax(Column column) {
-
-    // }
-
-
-    // private float normalizeNodeWeight(Node node, Double weight) {
-    //   double d_weight = weight;
-    //   double d_max = getMaxWeight();
-    //   double d_min = getMinWeight();
-    //   float maxWeight = (float) d_max;
-    //   float minWeight = (float) d_min;
-    //   float f_weight = (float) d_weight;
-    //   Float normalized = (f_weight-minWeight)/(maxWeight-minWeight);
-
-    //   return normalized;
-    //   // /**
-    //   // * 1. find the max and min in the column
-    //   // * 2. add to make all numbers positive
-    //   // * 3. divide by ten's place of the new max
-    //   // * 3b. functionality to choose desired max?
-    //   // */
-    // }
-
-    // private void adjustNodeTransparency(Node node, Double weight) {
-    //   Float normalized_weight = normalizeNodeWeight(node, weight);
-    //   node.setAlpha(normalized_weight);
-    //   // System.out.println("\"TESTING\"" + String.valueOf(getMinWeight()));
-    //   // /**
-    //   // * DO: Adjust transparency based on weight normalization
-    //   // * void  setAlpha(float a)
-    //   // * Sets the alpha (transparency) color component.
-    //   // ** https://gephi.org/gephi/0.9.2/apidocs/org/gephi/graph/api/ElementProperties.html#alpha--
-    //   // */
-    // }
-
-
-
-    // private void heatMapNodeWeight(Node node, Double weight) {
-    //   getColumn
-
-    //   float hue = (float) ((weight-0)/(0.66-0))
-    // }
-
-
-    // public void addWeightCol(graph){
-    //   graph.addColumn();
-    // }
-
-    // public void switchToDynamic(col){
-    //   return 0;
-    // }
 
     @Override
     public void goAlgo() {
@@ -420,27 +364,13 @@ public class ForceAtlas2 implements Layout {
             return;
         }
 
-        // Table table = graphModel.getNodeTable();
-        // table.addColumn("weight", Double.class);
-
-
         graph = graphModel.getGraphVisible();
 
         graph.readLock();
         boolean isDynamicWeight = graphModel.getEdgeTable().getColumn("weight").isDynamic();
         // to-do: make compatible with weight_dynamic
         // provide exception catch otherwise
-        // boolean isDynamicNodeWeight = graphModel.getNodeTable().getColumn("weight").isDynamic();
-        boolean isDynamicNodeWeight = false;
-
-        Table node_table = graphModel.getNodeTable();
-        if (node_table.hasColumn("weight") && node_table.getColumn("weight").isDynamic()){
-          isDynamicNodeWeight = true;
-        } else if (node_table.hasColumn("weight_dynamic") && node_table.getColumn("weight_dynamic").isDynamic()){
-          isDynamicNodeWeight = true;
-        }
-
-
+        boolean isDynamicNodeWeight = graphModel.getNodeTable().getColumn(this.nodeWeightColumnName).isDynamic();
 
 
 
@@ -449,6 +379,30 @@ public class ForceAtlas2 implements Layout {
         try {
             Node[] nodes = graph.getNodes().toArray();
             Edge[] edges = graph.getEdges().toArray();
+            setterMinWeight(nodes);
+            setterMaxWeight(nodes);
+            List<Double> all_weights = new ArrayList<Double>();
+
+            for (Node n: nodes) {
+              TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(this.nodeWeightColumnName);
+              double[] weights = map.toDoubleArray();
+
+              for (Double wt: weights) {
+                if (wt != null) {
+                all_weights.add(wt);
+                }
+
+              }
+            }
+            Double[] all_weights_array = new Double[all_weights.size()];
+            all_weights_array = all_weights.toArray(all_weights_array);
+            // double[] weights_double_ary = Stream.of(all_weights_array).mapToDouble(Double::doubleValue).toArray();
+
+
+            // int[] histogram = calcHistogram(all_weights_array, this.minWeight, this.maxWeight, 20);
+
+            // System.out.println(histogram);
+            // This is a histogram with 4 bins, 0-2.5, 2.5-5, 5-7.5, 7.5-10.
 
             // Initialise layout data
             for (Node n : nodes) {
@@ -517,9 +471,13 @@ public class ForceAtlas2 implements Layout {
                     Attraction.apply(e.getSource(), e.getTarget(), Math.pow(getEdgeWeight(e, isDynamicWeight, interval), getEdgeWeightInfluence()));
                 }
             }
-            // Node Weight
 
+            // Node Weight
             AttractionForce NodeAttraction = ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
+
+            // setterMinWeight(nodes);
+            // setterMaxWeight(nodes);
+
             for (Edge e : edges) {
               Node node_a = e.getSource();
               Node node_b = e.getTarget();
@@ -527,20 +485,12 @@ public class ForceAtlas2 implements Layout {
               if (hasNodeWeight(node_a) && hasNodeWeight(node_b)) {
                 Double wt_a = 0.0;
                 Double wt_b = 0.0;
-                if (hasNodeWeightStop(node_a) && hasNodeWeightStop(node_b)) {
-
-                  wt_a = getNodeWeight(node_a, isDynamicNodeWeight, interval, "weight");
-                  wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval, "weight");
-
-                }
-
-                if (hasNodeWeightDynamic(node_a) && hasNodeWeightDynamic(node_b)) {
-
-                  wt_a = getNodeWeight(node_a, isDynamicNodeWeight, interval, "weight_dynamic");
-                  wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval, "weight_dynamic");
-
-                }
-
+                wt_a = getNodeWeight(node_a, isDynamicNodeWeight, interval);
+                wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval);
+                // setterMinWeight();
+                // setterMaxWeight();
+                // adjustHue(nodes, node_a, wt_a);
+                // adjustHue(nodes, node_b, wt_b);
                 NodeAttraction.apply(node_a, node_b, ((wt_a + wt_b)/2));
 
             }
