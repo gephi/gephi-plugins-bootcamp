@@ -127,6 +127,7 @@ public class ForceAtlas2 implements Layout {
 
 
 
+
     private void setNodeWeightColumnName(Table table) {
       if (table.hasColumn("weight")) {
         this.nodeWeightColumnName = "weight";
@@ -356,35 +357,113 @@ public class ForceAtlas2 implements Layout {
         //   node.setColor(new_color);
         // }
 
-      float s = 1.0f;
-      float b = 1.0f;
-      float hue_float = 0f;
+      // float s = 1.0f;
+      // float b = 1.0f;
+      // float r = 0f;
+      // if (weight >= -3.0 && weight < -2.5) {
+      //   hue_float = (0)*(0.055f);
+      // } if (weight >= -2.5 && weight < -2.0) {
+      //   hue_float = (1)*(0.055f);
+      // } if (weight >= -2.0 && weight < -1.5) {
+      //   hue_float = (2)*(0.055f);
+      // } if (weight >= -1.5 && weight < -1.0) {
+      //   hue_float = (3)*(0.055f);
+      // } if (weight >= -1.0 && weight < -0.5) {
+      //   hue_float = (4)*(0.055f);
+      // } if (weight >= -0.5 && weight < 0) {
+      //   hue_float = (5)*(0.055f);
+      // } if (weight >= 0.0 && weight < 0.5) {
+      //   hue_float = (6)*(0.055f);
+      // } if (weight >= 0.5 && weight < 1.0) {
+      //   hue_float = (7)*(0.055f);
+      // } if (weight >= 1.0 && weight < 1.5) {
+      //   hue_float = (8)*(0.055f);
+      // } if (weight >= 1.5 && weight < 2.0) {
+      //   hue_float = (9)*(0.055f);
+      // } if (weight >= 2.0 && weight < 2.5) {
+      //   hue_float = (10)*(0.055f);
+      // } if (weight >= 2.5 && weight <= 3) {
+      //   hue_float = (11)*(0.055f);
+      // }
+    //         Color new_color = Color.getHSBColor(hue_float, s, b);
+    //   node.setColor(new_color);
+
+
+    //   if (weight < -3.0) {
+    //     node.setColor(Color.gray);
+    //   } if (weight > 3.0) {
+    //     node.setColor(Color.black);
+    //   }
+    // }
+
+      float r = 0.0f;
+      float g = 0.0f;
+      float b = 0.0f;
+
+
       if (weight >= -3.0 && weight < -2.5) {
-        hue_float = (0)*(0.055f);
+        // rgb(0,51,153)
+        r = 0f;
+        g = 51/255f;
+        b = 153/255f;
       } if (weight >= -2.5 && weight < -2.0) {
-        hue_float = (1)*(0.055f);
+// rgb(51,92,173)
+        r = 51/255f;
+        g = 92/255f;
+        b = 173/255f;
       } if (weight >= -2.0 && weight < -1.5) {
-        hue_float = (2)*(0.055f);
+// rgb(102,133,194)
+        r = 102/255f;
+        g = 133/255f;
+        b = 194/255f;
+
       } if (weight >= -1.5 && weight < -1.0) {
-        hue_float = (3)*(0.055f);
+// rgb(153,173,214)
+        r = 153/255f;
+        g = 173/255f;
+        b = 214/255f;
       } if (weight >= -1.0 && weight < -0.5) {
-        hue_float = (4)*(0.055f);
+// rgb(204,214,235)
+        r = 204/255f;
+        g = 214/255f;
+        b = 235/255f;
       } if (weight >= -0.5 && weight < 0) {
-        hue_float = (5)*(0.055f);
+// rgb(255,255,255)
+        r = 255/255f;
+        g = 255/255f;
+        b = 255/255f;
       } if (weight >= 0.0 && weight < 0.5) {
-        hue_float = (6)*(0.055f);
+// rgb(238,213,213)
+        r = 238/255f;
+        g = 213/255f;
+        b = 213/255f;
       } if (weight >= 0.5 && weight < 1.0) {
-        hue_float = (7)*(0.055f);
+// rgb(221,170,170)
+        r = 221/255f;
+        g = 170/255f;
+        b = 170/255f;
       } if (weight >= 1.0 && weight < 1.5) {
-        hue_float = (8)*(0.055f);
+// rgb(204,128,128)
+        r = 204/255f;
+        g = 128/255f;
+        b = 128/255f;
       } if (weight >= 1.5 && weight < 2.0) {
-        hue_float = (9)*(0.055f);
+// rgb(187,85,85)
+        r = 187/255f;
+        g = 85/255f;
+        b = 85/255f;
       } if (weight >= 2.0 && weight < 2.5) {
-        hue_float = (10)*(0.055f);
+// rgb(170,43,43)
+        r = 170/255f;
+        g = 43/255f;
+        b = 43/255f;
       } if (weight >= 2.5 && weight <= 3) {
-        hue_float = (11)*(0.055f);
+// rgb(153,0,0)
+        r = 153/255f;
+        g = 0f;
+        b = 0f;
       }
-      Color new_color = Color.getHSBColor(hue_float, s, b);
+      Color new_color = new Color(r, g, b);
       node.setColor(new_color);
 
 
@@ -528,8 +607,7 @@ public class ForceAtlas2 implements Layout {
             }
 
             // Node Weight
-            AttractionForce NodeAttraction = \
-            ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
+            AttractionForce NodeAttraction = ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
 
             // setterMinWeight(nodes);
             // setterMaxWeight(nodes);
