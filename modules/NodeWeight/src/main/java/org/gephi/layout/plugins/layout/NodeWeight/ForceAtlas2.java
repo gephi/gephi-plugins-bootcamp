@@ -115,6 +115,7 @@ public class ForceAtlas2 implements Layout {
     private double barnesHutTheta;
     private boolean linLogMode;
     private boolean strongGravityMode;
+    private boolean heatMapMode;
     private int threadCount;
     private int currentThreadCount;
     private Region rootRegion;
@@ -200,20 +201,20 @@ public class ForceAtlas2 implements Layout {
         }
     }
 
-    public static int[] calcHistogram(double[] data, double min, double max, int numBins) {
-      final int[] result = new int[numBins];
-      final double binSize = (max - min)/numBins;
+    // public static int[] calcHistogram(double[] data, double min, double max, int numBins) {
+    //   final int[] result = new int[numBins];
+    //   final double binSize = (max - min)/numBins;
 
-      for (double d : data) {
-        int bin = (int) ((d - min) / binSize);
-        if (bin < 0) { /* this data is smaller than min */ }
-        else if (bin >= numBins) { /* this data point is bigger than max */ }
-        else {
-          result[bin] += 1;
-        }
-      }
-      return result;
-    }
+    //   for (double d : data) {
+    //     int bin = (int) ((d - min) / binSize);
+    //     if (bin < 0) { /* this data is smaller than min */ }
+    //     else if (bin >= numBins) { /* this data point is bigger than max */ }
+    //     else {
+    //       result[bin] += 1;
+    //     }
+    //   }
+    //   return result;
+    // }
 
 
 
@@ -273,87 +274,130 @@ public class ForceAtlas2 implements Layout {
     }
 
 
-    private void setterMinWeight(Node[] nodes) {
-      Double min;
+    // private void setterMinWeight(Node[] nodes) {
+    //   Double min;
 
-      // seed min value from data
-      TimestampDoubleMap seed_map = (TimestampDoubleMap) nodes[0].getAttribute(this.nodeWeightColumnName);
-      double[] seed_weights = seed_map.toDoubleArray();
-      min = seed_weights[0];
+    //   // seed min value from data
+    //   TimestampDoubleMap seed_map = (TimestampDoubleMap) nodes[0].getAttribute(this.nodeWeightColumnName);
+    //   double[] seed_weights = seed_map.toDoubleArray();
+    //   min = seed_weights[0];
 
-      for (Node n: nodes) {
-        TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(this.nodeWeightColumnName);
-        double[] weights = map.toDoubleArray();
+    //   for (Node n: nodes) {
+    //     TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(this.nodeWeightColumnName);
+    //     double[] weights = map.toDoubleArray();
 
-        for (Double wt: weights) {
-          if (wt < min) {
-            min = wt;
-          }
+    //     for (Double wt: weights) {
+    //       if (wt < min) {
+    //         min = wt;
+    //       }
 
-        }
-      }
-      // System.out.println("");
-      // System.out.println("----------------------------");
-      // System.out.println("MIN: " +  min );
-      // System.out.println("----------------------------");
-      // System.out.println("");
-      this.minWeight = min;
-    }
+    //     }
+    //   }
+    //   // System.out.println("");
+    //   // System.out.println("----------------------------");
+    //   // System.out.println("MIN: " +  min );
+    //   // System.out.println("----------------------------");
+    //   // System.out.println("");
+    //   this.minWeight = min;
+    // }
 
-    private void setterMaxWeight(Node[] nodes) {
-        Double max;
-        String column_name = this.nodeWeightColumnName;
-        // seed min value from data
-        TimestampDoubleMap seed_map = (TimestampDoubleMap) nodes[0].getAttribute(column_name);
-        double[] seed_weights = seed_map.toDoubleArray();
-        max = seed_weights[0];
+    // private void setterMaxWeight(Node[] nodes) {
+    //     Double max;
+    //     String column_name = this.nodeWeightColumnName;
+    //     // seed min value from data
+    //     TimestampDoubleMap seed_map = (TimestampDoubleMap) nodes[0].getAttribute(column_name);
+    //     double[] seed_weights = seed_map.toDoubleArray();
+    //     max = seed_weights[0];
 
-        for (Node n: nodes) {
-          TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(column_name);
-          double[] weights = map.toDoubleArray();
+    //     for (Node n: nodes) {
+    //       TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(column_name);
+    //       double[] weights = map.toDoubleArray();
 
-          for (Double wt: weights) {
-            if (wt > max) {
-              max = wt;
-            }
+    //       for (Double wt: weights) {
+    //         if (wt > max) {
+    //           max = wt;
+    //         }
 
-          }
-        }
-        // System.out.println("");
-        // System.out.println("----------------------------");
-        // System.out.println("MAX: " +  max );
-        // System.out.println("----------------------------");
-        // System.out.println("");
-        this.maxWeight = max;
-    }
+    //       }
+    //     }
+    //     // System.out.println("");
+    //     // System.out.println("----------------------------");
+    //     // System.out.println("MAX: " +  max );
+    //     // System.out.println("----------------------------");
+    //     // System.out.println("");
+    //     this.maxWeight = max;
+    // }
 
     private void adjustHue(Node[] nodes, Node node, Double weight){
         // Double min = getMinWeight(nodes);
         // Double max = getMaxWeight(nodes);
 
-        Double min = this.minWeight;
-        System.out.println("");
-        System.out.println("----------------------------");
-        System.out.println("MIN: " +  min );
-        System.out.println("----------------------------");
-        System.out.println("");
-        Double max = this.maxWeight;
-        System.out.println("");
-        System.out.println("----------------------------");
-        System.out.println("MAX: " +  max );
-        System.out.println("----------------------------");
-        System.out.println("");
+        // Double min = this.minWeight;
+        // System.out.println("");
+        // System.out.println("----------------------------");
+        // System.out.println("MIN: " +  min );
+        // System.out.println("----------------------------");
+        // System.out.println("");
+        // Double max = this.maxWeight;
+        // System.out.println("");
+        // System.out.println("----------------------------");
+        // System.out.println("MAX: " +  max );
+        // System.out.println("----------------------------");
+        // System.out.println("");
 
         // scale weights to lie between 0 and 0.66
-        double hue_double = (double)(((weight - min)/(max - min))*(0.66-0.0) + 0.0);
-        //node.getNodeData().setColor(float r, float g, float b)
-        float hue_float = (float) hue_double;
-        float s = 1.0f;
-        float b = 1.0f;
-        Color new_color = Color.getHSBColor(hue_float, s, b);
-        node.setColor(new_color);
-//Converts the components of a color, as specified by the HSB model, to an equivalent set of values for the default RGB model.
+        // if (weight > -3 || weight < 3) {
+        //   double hue_double = (double)(((weight - (-3))/(3 - (-3)))*(0.66-0.0) + 0.0);
+        //   //node.getNodeData().setColor(float r, float g, float b)
+        //   float hue_float = (float) hue_double;
+        //   float s = 1.0f;
+        //   float b = 1.0f;
+        //   Color new_color = Color.getHSBColor(hue_float, s, b);
+        //   node.setColor(new_color);
+        // }
+
+      float s = 1.0f;
+      float b = 1.0f;
+      float hue_float = 0f;
+      if (weight >= -3.0 && weight < -2.5) {
+        hue_float = (0)*(0.055f);
+      } if (weight >= -2.5 && weight < -2.0) {
+        hue_float = (1)*(0.055f);
+      } if (weight >= -2.0 && weight < -1.5) {
+        hue_float = (2)*(0.055f);
+      } if (weight >= -1.5 && weight < -1.0) {
+        hue_float = (3)*(0.055f);
+      } if (weight >= -1.0 && weight < -0.5) {
+        hue_float = (4)*(0.055f);
+      } if (weight >= -0.5 && weight < 0) {
+        hue_float = (5)*(0.055f);
+      } if (weight >= 0.0 && weight < 0.5) {
+        hue_float = (6)*(0.055f);
+      } if (weight >= 0.5 && weight < 1.0) {
+        hue_float = (7)*(0.055f);
+      } if (weight >= 1.0 && weight < 1.5) {
+        hue_float = (8)*(0.055f);
+      } if (weight >= 1.5 && weight < 2.0) {
+        hue_float = (9)*(0.055f);
+      } if (weight >= 2.0 && weight < 2.5) {
+        hue_float = (10)*(0.055f);
+      } if (weight >= 2.5 && weight <= 3) {
+        hue_float = (11)*(0.055f);
+      }
+      Color new_color = Color.getHSBColor(hue_float, s, b);
+      node.setColor(new_color);
+
+
+      if (weight < -3.0) {
+        node.setColor(Color.gray);
+      } if (weight > 3.0) {
+        node.setColor(Color.black);
+      }
     }
+//Converts the components of a color, as specified by the HSB model, to an equivalent set of values for the default RGB model.
+
+
+
 
 
 
@@ -379,29 +423,40 @@ public class ForceAtlas2 implements Layout {
         try {
             Node[] nodes = graph.getNodes().toArray();
             Edge[] edges = graph.getEdges().toArray();
-            setterMinWeight(nodes);
-            setterMaxWeight(nodes);
-            List<Double> all_weights = new ArrayList<Double>();
+            // setterMinWeight(nodes);
+            // setterMaxWeight(nodes);
+            // List<Double> all_weights = new ArrayList<Double>();
 
-            for (Node n: nodes) {
-              TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(this.nodeWeightColumnName);
-              double[] weights = map.toDoubleArray();
+            // for (Node n: nodes) {
+            //   TimestampDoubleMap map = (TimestampDoubleMap) n.getAttribute(this.nodeWeightColumnName);
+            //   double[] weights = map.toDoubleArray();
 
-              for (Double wt: weights) {
-                if (wt != null) {
-                all_weights.add(wt);
-                }
+            //   for (Double wt: weights) {
+            //     if (wt != null) {
+            //     all_weights.add(wt);
+            //     }
 
-              }
-            }
-            Double[] all_weights_array = new Double[all_weights.size()];
-            all_weights_array = all_weights.toArray(all_weights_array);
-            // double[] weights_double_ary = Stream.of(all_weights_array).mapToDouble(Double::doubleValue).toArray();
+            //   }
+            // }
+            // // Double[] all_weights_array = new Double[all_weights.size()];
+            // // all_weights_array = all_weights.toArray(all_weights_array);
 
 
-            // int[] histogram = calcHistogram(all_weights_array, this.minWeight, this.maxWeight, 20);
+            // double[] tempArray = new double[all_weights.size()];
+            // int i = 0;
+            // for(Double d : all_weights) {
+            //   tempArray[i] = (double) d;
+            //   i++;
+            // }
 
-            // System.out.println(histogram);
+
+            // int[] histogram = calcHistogram(tempArray, -3.0, 3.0, 12);
+            // Double bin_diff = 0.5;
+            // for (int j=0; j<12 ; j++ ) {
+            //   System.out.println(String.valueOf(-3 + ((j)*(bin_diff))) + "-" + String.valueOf(-3 + ((j+1)*(bin_diff))) + ": " + String.valueOf(histogram[j]));
+            //   // System.out.println(histogram[j]);
+            // }
+
             // This is a histogram with 4 bins, 0-2.5, 2.5-5, 5-7.5, 7.5-10.
 
             // Initialise layout data
@@ -473,7 +528,8 @@ public class ForceAtlas2 implements Layout {
             }
 
             // Node Weight
-            AttractionForce NodeAttraction = ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
+            AttractionForce NodeAttraction = \
+            ForceFactory.builder.buildAttraction(isLinLogMode(), isOutboundAttractionDistribution(), isAdjustSizes(), 1 * ((isOutboundAttractionDistribution()) ? (outboundAttCompensation) : (1)));
 
             // setterMinWeight(nodes);
             // setterMaxWeight(nodes);
@@ -489,8 +545,10 @@ public class ForceAtlas2 implements Layout {
                 wt_b = getNodeWeight(node_b, isDynamicNodeWeight, interval);
                 // setterMinWeight();
                 // setterMaxWeight();
-                // adjustHue(nodes, node_a, wt_a);
-                // adjustHue(nodes, node_b, wt_b);
+                if (isHeatMapMode()) {
+                  adjustHue(nodes, node_a, wt_a);
+                  adjustHue(nodes, node_b, wt_b);
+                }
                 NodeAttraction.apply(node_a, node_b, ((wt_a + wt_b)/2));
 
             }
@@ -665,7 +723,13 @@ public class ForceAtlas2 implements Layout {
                     "ForceAtlas2.strongGravityMode.name",
                     NbBundle.getMessage(getClass(), "ForceAtlas2.strongGravityMode.desc"),
                     "isStrongGravityMode", "setStrongGravityMode"));
-
+            properties.add(LayoutProperty.createProperty(
+                    this, Boolean.class,
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.heatMapMode.name"),
+                    FORCEATLAS2_TUNING,
+                    "ForceAtlas2.heatMapMode.name",
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.heatMapMode.desc"),
+                    "isHeatMapMode", "setHeatMapMode"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(getClass(), "ForceAtlas2.gravity.name"),
@@ -760,6 +824,7 @@ public class ForceAtlas2 implements Layout {
             setScalingRatio(10.0);
         }
         setStrongGravityMode(false);
+        setHeatMapMode(false);
         setGravity(1.);
 
         // Behavior
@@ -853,6 +918,14 @@ public class ForceAtlas2 implements Layout {
 
     public void setStrongGravityMode(Boolean strongGravityMode) {
         this.strongGravityMode = strongGravityMode;
+    }
+
+    public Boolean isHeatMapMode() {
+        return heatMapMode;
+    }
+
+    public void setHeatMapMode(Boolean heatMapMode) {
+        this.heatMapMode = heatMapMode;
     }
 
     public Double getGravity() {
