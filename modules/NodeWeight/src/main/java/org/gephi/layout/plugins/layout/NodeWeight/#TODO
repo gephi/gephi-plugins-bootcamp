@@ -22,3 +22,10 @@ Done:
 
     i. Resolve use of weight vs weight_dynamic
   Check if weight is dynamic; check if dynamic_weight is dynamic; use whichever one exists
+
+
+
+
+
+verifying weight column contains doubles in the initAlgo method
+
