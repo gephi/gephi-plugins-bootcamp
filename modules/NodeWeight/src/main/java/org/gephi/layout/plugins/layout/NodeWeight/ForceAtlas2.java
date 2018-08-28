@@ -124,6 +124,7 @@ public class ForceAtlas2 implements Layout {
     private double minWeight;
     private double maxWeight;
     private String nodeWeightColumnName;
+    private double nodeWeightScaling;
 
 
 
@@ -256,19 +257,21 @@ public class ForceAtlas2 implements Layout {
 
 
     private double getNodeWeight(Node node, boolean isDynamicNodeWeight, Interval interval) {
+
         if (isDynamicNodeWeight) {
             // node_weight = (Double) n.getAttribute("gravity_x");
             TimestampMap map = (TimestampMap) node.getAttribute(this.nodeWeightColumnName);
             // Estimator estimator = (Estimator) AVERAGE;
-            Double prev_value = 0.0;
-            Double value = (Double) map.get(interval, Estimator.AVERAGE);
-            if (value != null) {
-              prev_value = value;
-              return value;
-            } else {
-              return prev_value;
-            }
 
+            Double value = (Double) map.get(interval, Estimator.AVERAGE);
+            if (value == null) {
+              Interval prev_interval = new Interval (Interval.INFINITY_INTERVAL.getLow(), interval.getLow());
+              value = (Double) map.get(prev_interval, Estimator.LAST);
+              if (value == null) {
+                value = 0.0;
+              }
+            }
+            return value;
         } else {
           return (Double) node.getAttribute(this.nodeWeightColumnName);
         }
@@ -407,32 +410,38 @@ public class ForceAtlas2 implements Layout {
         g = 51/255f;
         b = 153/255f;
       } if (weight >= -2.5 && weight < -2.0) {
-// rgb(51,92,173)
-        r = 51/255f;
-        g = 92/255f;
-        b = 173/255f;
+// rgb(43,85,170)
+        r = 43/255f;
+        g = 85/255f;
+        b = 170/255f;
       } if (weight >= -2.0 && weight < -1.5) {
-// rgb(102,133,194)
-        r = 102/255f;
-        g = 133/255f;
-        b = 194/255f;
+// rgb(85,119,187)
+        r = 85/255f;
+        g = 119/255f;
+        b = 187/255f;
 
       } if (weight >= -1.5 && weight < -1.0) {
-// rgb(153,173,214)
+// rgb(128,153,204)
         r = 153/255f;
         g = 173/255f;
         b = 214/255f;
       } if (weight >= -1.0 && weight < -0.5) {
-// rgb(204,214,235)
+// rgb(170,187,221)
         r = 204/255f;
         g = 214/255f;
         b = 235/255f;
       } if (weight >= -0.5 && weight < 0) {
+// rgb(213,221,238)
+        r = 213/255f;
+        g = 221/255f;
+        b = 238/255f;
+      }
+      if (weight == 0) {
 // rgb(255,255,255)
         r = 255/255f;
         g = 255/255f;
         b = 255/255f;
-      } if (weight >= 0.0 && weight < 0.5) {
+      } if (weight > 0.0 && weight < 0.5) {
 // rgb(238,213,213)
         r = 238/255f;
         g = 213/255f;
@@ -627,7 +636,7 @@ public class ForceAtlas2 implements Layout {
                   adjustHue(nodes, node_a, wt_a);
                   adjustHue(nodes, node_b, wt_b);
                 }
-                NodeAttraction.apply(node_a, node_b, ((wt_a + wt_b)/2));
+                NodeAttraction.apply(node_a, node_b, (getNodeWeightScaling()*(wt_a + wt_b)/2));
 
             }
 
@@ -772,20 +781,20 @@ public class ForceAtlas2 implements Layout {
         final String FORCEATLAS2_THREADS = NbBundle.getMessage(getClass(), "ForceAtlas2.threads");
 
         try {
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(getClass(), "ForceAtlas2.maxWeight.name"),
-                    FORCEATLAS2_TUNING,
-                    "ForceAtlas2.maxWeight.name",
-                    NbBundle.getMessage(getClass(), "ForceAtlas2.maxWeight.desc"),
-                    "getMaxWeight", "setMaxWeight"));
-            properties.add(LayoutProperty.createProperty(
-                    this, Double.class,
-                    NbBundle.getMessage(getClass(), "ForceAtlas2.minWeight.name"),
-                    FORCEATLAS2_TUNING,
-                    "ForceAtlas2.minWeight.name",
-                    NbBundle.getMessage(getClass(), "ForceAtlas2.minWeight.desc"),
-                    "getMinWeight", "setMinWeight"));
+            // properties.add(LayoutProperty.createProperty(
+            //         this, Double.class,
+            //         NbBundle.getMessage(getClass(), "ForceAtlas2.maxWeight.name"),
+            //         FORCEATLAS2_TUNING,
+            //         "ForceAtlas2.maxWeight.name",
+            //         NbBundle.getMessage(getClass(), "ForceAtlas2.maxWeight.desc"),
+            //         "getMaxWeight", "setMaxWeight"));
+            // properties.add(LayoutProperty.createProperty(
+            //         this, Double.class,
+            //         NbBundle.getMessage(getClass(), "ForceAtlas2.minWeight.name"),
+            //         FORCEATLAS2_TUNING,
+            //         "ForceAtlas2.minWeight.name",
+            //         NbBundle.getMessage(getClass(), "ForceAtlas2.minWeight.desc"),
+            //         "getMinWeight", "setMinWeight"));
             properties.add(LayoutProperty.createProperty(
                     this, Double.class,
                     NbBundle.getMessage(getClass(), "ForceAtlas2.scalingRatio.name"),
@@ -793,7 +802,13 @@ public class ForceAtlas2 implements Layout {
                     "ForceAtlas2.scalingRatio.name",
                     NbBundle.getMessage(getClass(), "ForceAtlas2.scalingRatio.desc"),
                     "getScalingRatio", "setScalingRatio"));
-
+            properties.add(LayoutProperty.createProperty(
+                    this, Double.class,
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.nodeWeightScaling.name"),
+                    FORCEATLAS2_TUNING,
+                    "ForceAtlas2.nodeWeightScaling.name",
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.nodeWeightScaling.desc"),
+                    "getNodeWeightScaling", "setNodeWeightScaling"));
             properties.add(LayoutProperty.createProperty(
                     this, Boolean.class,
                     NbBundle.getMessage(getClass(), "ForceAtlas2.strongGravityMode.name"),
@@ -902,6 +917,8 @@ public class ForceAtlas2 implements Layout {
             setScalingRatio(10.0);
         }
         setStrongGravityMode(false);
+        // setNodeWeightAttraction(false);
+        setNodeWeightScaling(1.);
         setHeatMapMode(false);
         setGravity(1.);
 
@@ -1013,6 +1030,15 @@ public class ForceAtlas2 implements Layout {
     public void setGravity(Double gravity) {
         this.gravity = gravity;
     }
+
+    public Double getNodeWeightScaling() {
+      return nodeWeightScaling;
+    }
+
+    public void setNodeWeightScaling(Double factor) {
+      this.nodeWeightScaling = factor;
+    }
+
 
     public Integer getThreadsCount() {
         return threadCount;
