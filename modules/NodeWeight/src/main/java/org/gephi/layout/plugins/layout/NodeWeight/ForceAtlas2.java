@@ -118,6 +118,7 @@ public class ForceAtlas2 implements Layout {
     private boolean strongGravityMode;
     private boolean heatMapChangeMode;
     private boolean heatMapMode;
+    private boolean opacityMode;
     private int threadCount;
     private int currentThreadCount;
     private Region rootRegion;
@@ -386,34 +387,34 @@ public class ForceAtlas2 implements Layout {
 
       if (diff >= -3.0 && diff < -2.5) {
       // rgb(255,51,0)
-        r = 255/255f;
-        g = 51/255f;
+        r = 204/255f;
+        g = 0f;
         b = 0f;
       } if (diff >= -2.5 && diff < -2.0) {
       // rgb(255,85,43)
-        r = 255/255f;
-        g = 85/255f;
+        r = 213/255f;
+        g = 43/255f;
         b = 43/255f;
       } if (diff >= -2.0 && diff < -1.5) {
       // rgb(255,119,85)
-        r = 255/255f;
-        g = 119/255f;
+        r = 221/255f;
+        g = 85/255f;
         b = 85/255f;
 
       } if (diff >= -1.5 && diff < -1.0) {
       // rgb(255,153,128)
-        r = 255/255f;
-        g = 153/255f;
+        r = 230/255f;
+        g = 128/255f;
         b = 128/255f;
       } if (diff >= -1.0 && diff < -0.5) {
       // rgb(255,187,170)
-        r = 255/255f;
-        g = 187/255f;
+        r = 238/255f;
+        g = 170/255f;
         b = 170/255f;
       } if (diff >= -0.5 && diff < 0) {
       // rgb(255,221,213)
-        r = 255/255f;
-        g = 221/255f;
+        r = 247/255f;
+        g = 213/255f;
         b = 213/255f;
       }
 
@@ -428,32 +429,32 @@ public class ForceAtlas2 implements Layout {
       if (diff > 0.0 && diff < 0.5) {
       // rgb(213,247,213)
         r = 213/255f;
-        g = 247/255f;
+        g = 238/255f;
         b = 213/255f;
       } if (diff >= 0.5 && diff < 1.0) {
       // rgb(170,238,170)
         r = 170/255f;
-        g = 238/255f;
+        g = 221/255f;
         b = 170/255f;
       } if (diff >= 1.0 && diff < 1.5) {
       // rgb(128,230,128)
         r = 128/255f;
-        g = 230/255f;
+        g = 204/255f;
         b = 128/255f;
       } if (diff >= 1.5 && diff < 2.0) {
       // rgb(85,221,85)
         r = 85/255f;
-        g = 221/255f;
+        g = 187/255f;
         b = 85/255f;
       } if (diff >= 2.0 && diff < 2.5) {
       // rgb(43,213,43)
         r = 43/255f;
-        g = 213/255f;
+        g = 170/255f;
         b = 43/255f;
       } if (diff >= 2.5 && diff < 3) {
       // rgb(0,204,0)
         r = 0f;
-        g = 204/255f;
+        g = 153/255f;
         b = 0f;
       }
 
@@ -471,7 +472,51 @@ public class ForceAtlas2 implements Layout {
     }
 //Converts the components of a color, as specified by the HSB model, to an equivalent set of values for the default RGB model.
 
+    public void adjustOpacity(Node node, Double weight){
+      if (weight >= -3.0 && weight < -2.5) {
+        node.setAlpha(0.0833f*1f);
 
+      } if (weight >= -2.5 && weight < -2.0) {
+        node.setAlpha(0.0833f*2f);
+
+      } if (weight >= -2.0 && weight < -1.5) {
+        node.setAlpha(0.0833f*3f);
+
+      } if (weight >= -1.5 && weight < -1.0) {
+        node.setAlpha(0.0833f*4f);
+
+      } if (weight >= -1.0 && weight < -0.5) {
+        node.setAlpha(0.0833f*5f);
+
+      } if (weight >= -0.5 && weight < 0) {
+        node.setAlpha(0.0833f*6f);
+
+      } if (weight >= 0.0 && weight < 0.5) {
+        node.setAlpha(0.0833f*7f);
+
+      } if (weight >= 0.5 && weight < 1.0) {
+        node.setAlpha(0.0833f*8f);
+
+      } if (weight >= 1.0 && weight < 1.5) {
+        node.setAlpha(0.0833f*9f);
+
+      } if (weight >= 1.5 && weight < 2.0) {
+        node.setAlpha(0.0833f*10f);
+
+      } if (weight >= 2.0 && weight < 2.5) {
+        node.setAlpha(0.0833f*11f);
+
+      } if (weight >= 2.5 && weight <= 3) {
+       node.setAlpha(0.0833f*12f);
+      }
+
+      if (weight < -3) {
+        node.setColor(Color.white);
+      }
+      if (weight > 3) {
+        node.setColor(Color.black);
+      }
+    }
 
 
 
@@ -673,10 +718,10 @@ public class ForceAtlas2 implements Layout {
                   adjustHue(node_a, wt_a);
                   adjustHue(node_b, wt_b);
                 }
+
+
                 //if (isHeatMapChangeMode()){
                 if (isHeatMapChangeMode() && isDynamicNodeWeight) {
-///BOOKMARKME
-
                   Double change_a = getNodeWeightChange(node_a, isDynamicNodeWeight, interval, wt_a);
                   Double change_b = getNodeWeightChange(node_b, isDynamicNodeWeight, interval, wt_b);
                   adjustHueChange(node_a, change_a);
@@ -684,6 +729,15 @@ public class ForceAtlas2 implements Layout {
 
 
                 }
+                // Opacity applied last so both can be used
+                if (isOpacityMode()){
+                  adjustOpacity(node_a, wt_a);
+                  adjustOpacity(node_b, wt_b);
+                }
+
+
+
+
                 NodeAttraction.apply(node_a, node_b, (getNodeWeightScaling()*(wt_a + wt_b)/2));
 
             }
@@ -885,6 +939,13 @@ public class ForceAtlas2 implements Layout {
                     "isStrongGravityMode", "setStrongGravityMode"));
             properties.add(LayoutProperty.createProperty(
                     this, Boolean.class,
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.opacityMode.name"),
+                    FORCEATLAS2_TUNING,
+                    "ForceAtlas2.opacityMode.name",
+                    NbBundle.getMessage(getClass(), "ForceAtlas2.opacityMode.desc"),
+                    "isOpacityMode", "setOpacityMode"));
+            properties.add(LayoutProperty.createProperty(
+                    this, Boolean.class,
                     NbBundle.getMessage(getClass(), "ForceAtlas2.heatMapMode.name"),
                     FORCEATLAS2_TUNING,
                     "ForceAtlas2.heatMapMode.name",
@@ -995,6 +1056,7 @@ public class ForceAtlas2 implements Layout {
         setNodeWeightScaling(1.);
         setHeatMapMode(false);
         setHeatMapChangeMode(false);
+        setOpacityMode(false);
         setGravity(1.);
 
         // Behavior
@@ -1088,6 +1150,14 @@ public class ForceAtlas2 implements Layout {
 
     public void setStrongGravityMode(Boolean strongGravityMode) {
         this.strongGravityMode = strongGravityMode;
+    }
+
+    public Boolean isOpacityMode() {
+        return opacityMode;
+    }
+
+    public void setOpacityMode(Boolean opacityMode) {
+        this.opacityMode = opacityMode;
     }
 
     public Boolean isHeatMapMode() {
