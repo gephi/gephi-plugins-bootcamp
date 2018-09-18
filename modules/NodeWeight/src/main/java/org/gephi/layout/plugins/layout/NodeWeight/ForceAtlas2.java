@@ -293,162 +293,158 @@ public class ForceAtlas2 implements Layout {
         }
     }
 
-    // private Color colorBlender(Color a, Color b, Double proportion){
-    //   float propA = (float) proportion;
-    //   float propB = 1.0 - propA;
+    private Color colorBlender(Color a, Color b, Double proportion){
+      float propA = (float) proportion;
+      float propB = 1.0 - propA;
 
-    //   float rgbA[] = new float[3];
-    //   float rgbB[] = new float[3];
+      float rgbA[] = new float[3];
+      float rgbB[] = new float[3];
 
-    //   a.getColorComponents(rgbA);
-    //   b.getColorComponents(rgbB);
+      a.getColorComponents(rgbA);
+      b.getColorComponents(rgbB);
 
-    //   Color blend_color = new Color (rgbA[0] * propA + rgbB[0] * propB,
-    //   regbA[1] * propA + rgbB[1] * propB, rgbA[2] * propA + rgbB[2] * propB);
+      Color blend_color = new Color (rgbA[0] * propA + rgbB[0] * propB,
+      regbA[1] * propA + rgbB[1] * propB, rgbA[2] * propA + rgbB[2] * propB);
 
-    //   return blend_color;
-    // }
-
-//     private Color adjustHueRedBlue() {
-// if (weight >= -3.0 && weight < -2.5) {
-//         node.setAlpha(0.0833f*1f);
-
-//       } if (weight >= -2.5 && weight < -2.0) {
-//         node.setAlpha(0.0833f*2f);
-
-//       } if (weight >= -2.0 && weight < -1.5) {
-//         node.setAlpha(0.0833f*3f);
-
-//       } if (weight >= -1.5 && weight < -1.0) {
-//         node.setAlpha(0.0833f*4f);
-
-//       } if (weight >= -1.0 && weight < -0.5) {
-//         node.setAlpha(0.0833f*5f);
-
-//       } if (weight >= -0.5 && weight < 0) {
-//         node.setAlpha(0.0833f*6f);
-
-//       } if (weight >= 0.0 && weight < 0.5) {
-//         node.setAlpha(0.0833f*7f);
-
-//       } if (weight >= 0.5 && weight < 1.0) {
-//         node.setAlpha(0.0833f*8f);
-
-//       } if (weight >= 1.0 && weight < 1.5) {
-//         node.setAlpha(0.0833f*9f);
-
-//       } if (weight >= 1.5 && weight < 2.0) {
-//         node.setAlpha(0.0833f*10f);
-
-//       } if (weight >= 2.0 && weight < 2.5) {
-//         node.setAlpha(0.0833f*11f);
-
-//       } if (weight >= 2.5 && weight <= 3) {
-//        node.setAlpha(0.0833f*12f);
-//       }
-
-//       if (weight < -3) {
-//         node.setColor(Color.white);
-//       }
-//       if (weight > 3) {
-//         node.setColor(Color.black);
-//       }
-//     }
-
-    private void adjustHue(Node node, Double weight){
+      return blend_color;
+    }
+private void adjustHue(Node node, Double weight){
 
       float r = 0.0f;
       float g = 0.0f;
       float b = 0.0f;
 
+      Color blue = new Color(0f, 51/255f, 153/255f)
+      Color white = new Color.white
+      Color red = new Color(153/255f, 0f, 0f)
 
       if (weight >= -3.0 && weight < -2.5) {
-      // rgb(0,51,153)
-        r = 0f;
-        g = 51/255f;
-        b = 153/255f;
+        Color new_color = colorBlender(blue, white, 1);
       } if (weight >= -2.5 && weight < -2.0) {
-      // rgb(43,85,170)
-        r = 43/255f;
-        g = 85/255f;
-        b = 170/255f;
+        Color new_color = colorBlender(blue, white, (1-0.16667));
       } if (weight >= -2.0 && weight < -1.5) {
-      // rgb(85,119,187)
-        r = 85/255f;
-        g = 119/255f;
-        b = 187/255f;
-
+        Color new_color = colorBlender(blue, white, (1-(2*0.16667)));
       } if (weight >= -1.5 && weight < -1.0) {
-      // rgb(128,153,204)
-        r = 153/255f;
-        g = 173/255f;
-        b = 214/255f;
+        Color new_color = colorBlender(blue, white, (1-(3*0.16667)));
       } if (weight >= -1.0 && weight < -0.5) {
-      // rgb(170,187,221)
-        r = 204/255f;
-        g = 214/255f;
-        b = 235/255f;
+        Color new_color = colorBlender(blue, white, (1-(4*0.16667)));
       } if (weight >= -0.5 && weight < 0) {
-      // rgb(213,221,238)
-        r = 213/255f;
-        g = 221/255f;
-        b = 238/255f;
+        Color new_color = colorBlender(blue, white, (1-(5*0.16667)));
       }
       if (weight == 0) {
       // rgb(255,255,255)
-        r = 255/255f;
-        g = 255/255f;
-        b = 255/255f;
+        Color new_color = colorBlender(blue, white, 0);
       } if (weight > 0.0 && weight < 0.5) {
-      // rgb(238,213,213)
-        r = 238/255f;
-        g = 213/255f;
-        b = 213/255f;
+        Color new_color = colorBlender(white, red, (1-0.16667));
       } if (weight >= 0.5 && weight < 1.0) {
-      // rgb(221,170,170)
-        r = 221/255f;
-        g = 170/255f;
-        b = 170/255f;
+        Color new_color = colorBlender(white, red, (1-(2*0.16667)));
       } if (weight >= 1.0 && weight < 1.5) {
-      // rgb(204,128,128)
-        r = 204/255f;
-        g = 128/255f;
-        b = 128/255f;
+        Color new_color = colorBlender(white, red, (1-(3*0.16667)));
       } if (weight >= 1.5 && weight < 2.0) {
-      // rgb(187,85,85)
-        r = 187/255f;
-        g = 85/255f;
-        b = 85/255f;
+        Color new_color = colorBlender(white, red, (1-(4*0.16667)));
       } if (weight >= 2.0 && weight < 2.5) {
-      // rgb(170,43,43)
-        r = 170/255f;
-        g = 43/255f;
-        b = 43/255f;
+        Color new_color = colorBlender(white, red, (1-(5*0.16667)));
       } if (weight >= 2.5 && weight <= 3) {
-      // rgb(153,0,0)
-        r = 153/255f;
-        g = 0f;
-        b = 0f;
+        Color new_color = colorBlender(white, red, 0);
       }
-      Color new_color = new Color(r, g, b);
+
       node.setColor(new_color);
 
 
       if (weight < -3.0) {
-        r = 0f;
-        g = 51/255f;
-        b = 153/255f;
-        new_color = new Color(r, g, b);
-        node.setColor(new_color.brighter());
+        node.setColor(Color.black);
       } if (weight > 3.0) {
-        r = 153/255f;
-        g = 0f;
-        b = 0f;
-        new_color = new Color(r, g, b);
-        node.setColor(new_color.darker());
+        node.setColor(Color.gray);
 
       }
     }
+
+    // private void adjustHue(Node node, Double weight){
+
+    //   float r = 0.0f;
+    //   float g = 0.0f;
+    //   float b = 0.0f;
+
+
+    //   if (weight >= -3.0 && weight < -2.5) {
+    //   // rgb(0,51,153)
+    //     r = 0f;
+    //     g = 51/255f;
+    //     b = 153/255f;
+    //   } if (weight >= -2.5 && weight < -2.0) {
+    //   // rgb(43,85,170)
+    //     r = 43/255f;
+    //     g = 85/255f;
+    //     b = 170/255f;
+    //   } if (weight >= -2.0 && weight < -1.5) {
+    //   // rgb(85,119,187)
+    //     r = 85/255f;
+    //     g = 119/255f;
+    //     b = 187/255f;
+
+    //   } if (weight >= -1.5 && weight < -1.0) {
+    //   // rgb(128,153,204)
+    //     r = 153/255f;
+    //     g = 173/255f;
+    //     b = 214/255f;
+    //   } if (weight >= -1.0 && weight < -0.5) {
+    //   // rgb(170,187,221)
+    //     r = 204/255f;
+    //     g = 214/255f;
+    //     b = 235/255f;
+    //   } if (weight >= -0.5 && weight < 0) {
+    //   // rgb(213,221,238)
+    //     r = 213/255f;
+    //     g = 221/255f;
+    //     b = 238/255f;
+    //   }
+    //   if (weight == 0) {
+    //   // rgb(255,255,255)
+    //     r = 255/255f;
+    //     g = 255/255f;
+    //     b = 255/255f;
+    //   } if (weight > 0.0 && weight < 0.5) {
+    //   // rgb(238,213,213)
+    //     r = 238/255f;
+    //     g = 213/255f;
+    //     b = 213/255f;
+    //   } if (weight >= 0.5 && weight < 1.0) {
+    //   // rgb(221,170,170)
+    //     r = 221/255f;
+    //     g = 170/255f;
+    //     b = 170/255f;
+    //   } if (weight >= 1.0 && weight < 1.5) {
+    //   // rgb(204,128,128)
+    //     r = 204/255f;
+    //     g = 128/255f;
+    //     b = 128/255f;
+    //   } if (weight >= 1.5 && weight < 2.0) {
+    //   // rgb(187,85,85)
+    //     r = 187/255f;
+    //     g = 85/255f;
+    //     b = 85/255f;
+    //   } if (weight >= 2.0 && weight < 2.5) {
+    //   // rgb(170,43,43)
+    //     r = 170/255f;
+    //     g = 43/255f;
+    //     b = 43/255f;
+    //   } if (weight >= 2.5 && weight <= 3) {
+    //   // rgb(153,0,0)
+    //     r = 153/255f;
+    //     g = 0f;
+    //     b = 0f;
+    //   }
+    //   Color new_color = new Color(r, g, b);
+    //   node.setColor(new_color);
+
+
+    //   if (weight < -3.0) {
+    //     node.setColor(Color.black);
+    //   } if (weight > 3.0) {
+    //     node.setColor(Color.gray);
+
+    //   }
+    // }
 
 
 
