@@ -69,6 +69,7 @@ import org.gephi.layout.spi.LayoutProperty;
 
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -293,9 +294,9 @@ public class ForceAtlas2 implements Layout {
         }
     }
 
-    private Color colorBlender(Color a, Color b, Double proportion){
+    private Color colorBlender(Color a, Color b, double proportion){
       float propA = (float) proportion;
-      float propB = 1.0 - propA;
+      float propB = 1.0f - propA;
 
       float rgbA[] = new float[3];
       float rgbB[] = new float[3];
@@ -304,251 +305,75 @@ public class ForceAtlas2 implements Layout {
       b.getColorComponents(rgbB);
 
       Color blend_color = new Color (rgbA[0] * propA + rgbB[0] * propB,
-      regbA[1] * propA + rgbB[1] * propB, rgbA[2] * propA + rgbB[2] * propB);
+      rgbA[1] * propA + rgbB[1] * propB, rgbA[2] * propA + rgbB[2] * propB);
 
       return blend_color;
     }
-private void adjustHue(Node node, Double weight){
 
-      float r = 0.0f;
-      float g = 0.0f;
-      float b = 0.0f;
+    private void adjustColor(Node node, Double value, Color lo, Color md, Color hi){
 
-      Color blue = new Color(0f, 51/255f, 153/255f)
-      Color white = new Color.white
-      Color red = new Color(153/255f, 0f, 0f)
+      Color low = lo;
+      Color mid = md;
+      Color high = hi;
 
-      if (weight >= -3.0 && weight < -2.5) {
-        Color new_color = colorBlender(blue, white, 1);
-      } if (weight >= -2.5 && weight < -2.0) {
-        Color new_color = colorBlender(blue, white, (1-0.16667));
-      } if (weight >= -2.0 && weight < -1.5) {
-        Color new_color = colorBlender(blue, white, (1-(2*0.16667)));
-      } if (weight >= -1.5 && weight < -1.0) {
-        Color new_color = colorBlender(blue, white, (1-(3*0.16667)));
-      } if (weight >= -1.0 && weight < -0.5) {
-        Color new_color = colorBlender(blue, white, (1-(4*0.16667)));
-      } if (weight >= -0.5 && weight < 0) {
-        Color new_color = colorBlender(blue, white, (1-(5*0.16667)));
-      }
-      if (weight == 0) {
-      // rgb(255,255,255)
-        Color new_color = colorBlender(blue, white, 0);
-      } if (weight > 0.0 && weight < 0.5) {
-        Color new_color = colorBlender(white, red, (1-0.16667));
-      } if (weight >= 0.5 && weight < 1.0) {
-        Color new_color = colorBlender(white, red, (1-(2*0.16667)));
-      } if (weight >= 1.0 && weight < 1.5) {
-        Color new_color = colorBlender(white, red, (1-(3*0.16667)));
-      } if (weight >= 1.5 && weight < 2.0) {
-        Color new_color = colorBlender(white, red, (1-(4*0.16667)));
-      } if (weight >= 2.0 && weight < 2.5) {
-        Color new_color = colorBlender(white, red, (1-(5*0.16667)));
-      } if (weight >= 2.5 && weight <= 3) {
-        Color new_color = colorBlender(white, red, 0);
+      if (value >= -3.0 && value < -2.5) {
+        node.setColor(low);
+      } if (value >= -2.5 && value < -2.0) {
+        node.setColor(colorBlender(low, mid, (1-0.16667)));
+      } if (value >= -2.0 && value < -1.5) {
+        node.setColor(colorBlender(low, mid, (1-(2*0.16667))));
+      } if (value >= -1.5 && value < -1.0) {
+        node.setColor(colorBlender(low, mid, (1-(3*0.16667))));
+      } if (value >= -1.0 && value < -0.5) {
+        node.setColor(colorBlender(low, mid, (1-(4*0.16667))));
+      } if (value >= -0.5 && value < 0) {
+        node.setColor(colorBlender(low, mid, (1-(5*0.16667))));
       }
 
-      node.setColor(new_color);
+      if (value == 0.0) {
+        node.setColor(mid);
+      }
 
+      if (value > 0.0 && value < 0.5) {
+        node.setColor(colorBlender(mid, high, (1-0.16667)));
+      } if (value >= 0.5 && value < 1.0) {
+        node.setColor(colorBlender(mid, high, (1-(2*0.16667))));
+      } if (value >= 1.0 && value < 1.5) {
+        node.setColor(colorBlender(mid, high, (1-(3*0.16667))));
+      } if (value >= 1.5 && value < 2.0) {
+        node.setColor(colorBlender(mid, high, (1-(4*0.16667))));
+      } if (value >= 2.0 && value < 2.5) {
+        node.setColor(colorBlender(mid, high, (1-(5*0.16667))));
+      } if (value >= 2.5 && value < 3) {
+        node.setColor(high);
+      }
 
-      if (weight < -3.0) {
-        node.setColor(Color.black);
-      } if (weight > 3.0) {
+      if (value < -3.0) {
         node.setColor(Color.gray);
-
+      } if (value > 3.0) {
+        node.setColor(Color.black);
       }
     }
 
-    // private void adjustHue(Node node, Double weight){
+    private void adjustHue(Node node, Double weight){
+      Color blue = new Color(0f, 51/255f, 153/255f);
+      Color white = Color.white;
+      Color red = new Color(153/255f, 0f, 0f);
 
-    //   float r = 0.0f;
-    //   float g = 0.0f;
-    //   float b = 0.0f;
-
-
-    //   if (weight >= -3.0 && weight < -2.5) {
-    //   // rgb(0,51,153)
-    //     r = 0f;
-    //     g = 51/255f;
-    //     b = 153/255f;
-    //   } if (weight >= -2.5 && weight < -2.0) {
-    //   // rgb(43,85,170)
-    //     r = 43/255f;
-    //     g = 85/255f;
-    //     b = 170/255f;
-    //   } if (weight >= -2.0 && weight < -1.5) {
-    //   // rgb(85,119,187)
-    //     r = 85/255f;
-    //     g = 119/255f;
-    //     b = 187/255f;
-
-    //   } if (weight >= -1.5 && weight < -1.0) {
-    //   // rgb(128,153,204)
-    //     r = 153/255f;
-    //     g = 173/255f;
-    //     b = 214/255f;
-    //   } if (weight >= -1.0 && weight < -0.5) {
-    //   // rgb(170,187,221)
-    //     r = 204/255f;
-    //     g = 214/255f;
-    //     b = 235/255f;
-    //   } if (weight >= -0.5 && weight < 0) {
-    //   // rgb(213,221,238)
-    //     r = 213/255f;
-    //     g = 221/255f;
-    //     b = 238/255f;
-    //   }
-    //   if (weight == 0) {
-    //   // rgb(255,255,255)
-    //     r = 255/255f;
-    //     g = 255/255f;
-    //     b = 255/255f;
-    //   } if (weight > 0.0 && weight < 0.5) {
-    //   // rgb(238,213,213)
-    //     r = 238/255f;
-    //     g = 213/255f;
-    //     b = 213/255f;
-    //   } if (weight >= 0.5 && weight < 1.0) {
-    //   // rgb(221,170,170)
-    //     r = 221/255f;
-    //     g = 170/255f;
-    //     b = 170/255f;
-    //   } if (weight >= 1.0 && weight < 1.5) {
-    //   // rgb(204,128,128)
-    //     r = 204/255f;
-    //     g = 128/255f;
-    //     b = 128/255f;
-    //   } if (weight >= 1.5 && weight < 2.0) {
-    //   // rgb(187,85,85)
-    //     r = 187/255f;
-    //     g = 85/255f;
-    //     b = 85/255f;
-    //   } if (weight >= 2.0 && weight < 2.5) {
-    //   // rgb(170,43,43)
-    //     r = 170/255f;
-    //     g = 43/255f;
-    //     b = 43/255f;
-    //   } if (weight >= 2.5 && weight <= 3) {
-    //   // rgb(153,0,0)
-    //     r = 153/255f;
-    //     g = 0f;
-    //     b = 0f;
-    //   }
-    //   Color new_color = new Color(r, g, b);
-    //   node.setColor(new_color);
-
-
-    //   if (weight < -3.0) {
-    //     node.setColor(Color.black);
-    //   } if (weight > 3.0) {
-    //     node.setColor(Color.gray);
-
-    //   }
-    // }
-
-
-
+      adjustColor(node, weight, blue, white, red);
+    }
 
     private void adjustHueChange(Node node, Double diff){
-
-      float r = 0f;
-      float g = 0f;
-      float b = 0f;
-
-
-      if (diff >= -3.0 && diff < -2.5) {
-      // rgb(255,51,0)
-        r = 204/255f;
-        g = 0f;
-        b = 0f;
-      } if (diff >= -2.5 && diff < -2.0) {
-      // rgb(255,85,43)
-        r = 213/255f;
-        g = 43/255f;
-        b = 43/255f;
-      } if (diff >= -2.0 && diff < -1.5) {
-      // rgb(255,119,85)
-        r = 221/255f;
-        g = 85/255f;
-        b = 85/255f;
-
-      } if (diff >= -1.5 && diff < -1.0) {
-      // rgb(255,153,128)
-        r = 230/255f;
-        g = 128/255f;
-        b = 128/255f;
-      } if (diff >= -1.0 && diff < -0.5) {
-      // rgb(255,187,170)
-        r = 238/255f;
-        g = 170/255f;
-        b = 170/255f;
-      } if (diff >= -0.5 && diff < 0) {
-      // rgb(255,221,213)
-        r = 247/255f;
-        g = 213/255f;
-        b = 213/255f;
-      }
-
-
-
-      if (diff == 0.0) {
-      // rgb(255,255,255)
-
-      }
-
-
-      if (diff > 0.0 && diff < 0.5) {
-      // rgb(213,247,213)
-        r = 213/255f;
-        g = 238/255f;
-        b = 213/255f;
-      } if (diff >= 0.5 && diff < 1.0) {
-      // rgb(170,238,170)
-        r = 170/255f;
-        g = 221/255f;
-        b = 170/255f;
-      } if (diff >= 1.0 && diff < 1.5) {
-      // rgb(128,230,128)
-        r = 128/255f;
-        g = 204/255f;
-        b = 128/255f;
-      } if (diff >= 1.5 && diff < 2.0) {
-      // rgb(85,221,85)
-        r = 85/255f;
-        g = 187/255f;
-        b = 85/255f;
-      } if (diff >= 2.0 && diff < 2.5) {
-      // rgb(43,213,43)
-        r = 43/255f;
-        g = 170/255f;
-        b = 43/255f;
-      } if (diff >= 2.5 && diff < 3) {
-      // rgb(0,204,0)
-        r = 0f;
-        g = 153/255f;
-        b = 0f;
-      }
+      Color red = new Color(204/255f, 0f, 0f);
+      Color white = Color.white;
+      Color green = new Color(0f, 204/255f, 0f);
 
       if (diff != 0.0) {
-        Color new_color = new Color(r, g, b);
-        node.setColor(new_color);
-      }
-
-
-      if (diff < -3.0) {
-        r = 204/255f;
-        g = 0f;
-        b = 0f;
-        Color new_color = new Color(r, g, b);
-        node.setColor(new_color.brighter());
-      } if (diff > 3.0) {
-        r = 0f;
-        g = 153/255f;
-        b = 0f;
-        Color new_color = new Color(r, g, b);
-        node.setColor(new_color.darker());
+        adjustColor(node, diff, red, white, green);
       }
     }
+
+
 //Converts the components of a color, as specified by the HSB model, to an equivalent set of values for the default RGB model.
 
     public void adjustOpacity(Node node, Double weight){
