@@ -20,6 +20,13 @@
             <artifactId>org-openide-util-lookup</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.netbeans.api</groupId>
+            <artifactId>org-openide-dialogs</artifactId>
+            <type>jar</type>
+            <version>RELEASE81</version>
+
+        </dependency>
+        <dependency>
             <groupId>org.gephi</groupId>
             <artifactId>graph-api</artifactId>
         </dependency>
