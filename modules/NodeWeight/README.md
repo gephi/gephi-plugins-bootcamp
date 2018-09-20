@@ -1,4 +1,4 @@
-# Header 1 User Guide for Node Weight Plugin
+# User Guide for Node Weight Plugin
 
 1. Launch Gephi
 2. Install Node Weight plugin from Plugin menu in Gephi
