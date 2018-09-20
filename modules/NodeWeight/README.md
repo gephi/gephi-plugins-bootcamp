@@ -1,6 +1,6 @@
 # User Guide for Node Weight Plugin
 
-1. Launch Gephi
+1. Launch Gephi (to get started with Gephi visit https://gephi.org or https://github.com/gephi/gephi)
 2. Install Node Weight plugin from Plugin menu in Gephi
 3. Import data or a .gexf file
   * Dynamic data should be in string form like  [Timestamp: data], [timestamp: data].
