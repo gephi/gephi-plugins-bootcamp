@@ -32,7 +32,7 @@ Complete list of the plug-ins examples included in the bootcamp:
 ### Tool
 
 * **Find** 
-	* Tool with a autocomplete text field to find any node based on labels and zoom by it.
+	* Tool with an autocomplete text field to find any node based on labels and zoom by it.
 
 * **Add Nodes** 
 	* Listen to mouse clicks and adds nodes. Also adds edges if selecting other nodes.
