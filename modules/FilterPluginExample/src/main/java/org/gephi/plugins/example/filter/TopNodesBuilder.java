@@ -54,6 +54,7 @@ import org.gephi.graph.api.AttributeUtils;
 import org.gephi.graph.api.Column;
 import org.gephi.graph.api.GraphController;
 import org.gephi.graph.api.GraphModel;
+import org.gephi.project.api.Workspace;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -85,11 +86,11 @@ public class TopNodesBuilder implements CategoryBuilder {
             FilterLibrary.ATTRIBUTES);
 
     @Override
-    public FilterBuilder[] getBuilders() {
+    public FilterBuilder[] getBuilders(Workspace workspace) {
         List<FilterBuilder> builders = new ArrayList<FilterBuilder>();
 
         //Get all the current attribute columns
-        GraphModel am = Lookup.getDefault().lookup(GraphController.class).getGraphModel();
+        GraphModel am = Lookup.getDefault().lookup(GraphController.class).getGraphModel(workspace);
         for (Column c : am.getNodeTable()) {
             //Keep only numerical columns
             if (AttributeUtils.isNumberType(c.getTypeClass())) {
@@ -141,7 +142,7 @@ public class TopNodesBuilder implements CategoryBuilder {
         }
 
         @Override
-        public Filter getFilter() {
+        public Filter getFilter(Workspace workspace) {
             //Create the filter and set the column
             TopNodesFilter filter = new TopNodesFilter();
             filter.setColumn(column);

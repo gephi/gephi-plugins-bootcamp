@@ -90,6 +90,11 @@ public class GlowRenderer implements Renderer {
     }
 
     @Override
+    public void postProcess(PreviewModel previewModel, RenderTarget target,
+                            PreviewProperties properties) {
+    }
+
+    @Override
     public CanvasSize getCanvasSize(Item item, PreviewProperties properties) {
         return new CanvasSize();
     }

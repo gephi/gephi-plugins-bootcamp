@@ -4,7 +4,7 @@
     <parent>
         <artifactId>gephi-plugin-parent</artifactId>
         <groupId>org.gephi</groupId>
-        <version>0.9.0</version>
+        <version>0.9.3</version>
     </parent>
 
     <groupId>org.gephi.plugins.example</groupId>
@@ -15,10 +15,10 @@
     <name>ProcessorPluginExample</name>
 
     <dependencies>
-        
+
         <dependency>
             <groupId>org.gephi</groupId>
-            <artifactId>io-processor-plugin</artifactId>
+            <artifactId>io-importer-plugin</artifactId>
         </dependency>
         <dependency>
             <groupId>org.netbeans.api</groupId>
@@ -33,7 +33,7 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <groupId>org.apache.netbeans.utilities</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
                 <configuration>
                     <author>Mathieu Bastian</author>

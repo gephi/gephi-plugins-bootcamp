@@ -4,7 +4,7 @@
     <parent>
         <artifactId>gephi-plugin-parent</artifactId>
         <groupId>org.gephi</groupId>
-        <version>0.9.0</version>
+        <version>0.9.3</version>
     </parent>
 
     <groupId>org.gephi.plugins.example</groupId>
@@ -48,16 +48,12 @@
             <groupId>org.gephi</groupId>
             <artifactId>datalab-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.gephi</groupId>
-            <artifactId>lib.validation</artifactId>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
+                <groupId>org.apache.netbeans.utilities</groupId>
                 <artifactId>nbm-maven-plugin</artifactId>
                 <configuration>
                     <author>Mathieu Bastian</author>
