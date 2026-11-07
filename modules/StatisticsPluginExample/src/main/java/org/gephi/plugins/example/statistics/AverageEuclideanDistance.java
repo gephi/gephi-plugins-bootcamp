@@ -81,7 +81,7 @@ public class AverageEuclideanDistance implements Statistics {
         Table nodeTable = graphModel.getNodeTable();
         Column col = nodeTable.getColumn(AVG_EUCLIDEAN_DISTANCE);
         if (col == null) {
-            col = nodeTable.addColumn(AVG_EUCLIDEAN_DISTANCE, "Average Euclidean Distance", Double.class, Origin.DATA);
+            col = nodeTable.addColumn(AVG_EUCLIDEAN_DISTANCE, "Average Euclidean Distance", Double.class, Origin.DATA, null, false);
         }
 
         //Lock to graph. This is important to have consistent results if another
