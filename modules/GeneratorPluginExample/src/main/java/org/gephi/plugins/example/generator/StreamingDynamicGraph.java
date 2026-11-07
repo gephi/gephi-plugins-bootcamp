@@ -44,7 +44,6 @@ package org.gephi.plugins.example.generator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import org.gephi.desktop.project.api.ProjectControllerUI;
 import org.gephi.graph.api.*;
 import org.gephi.io.generator.spi.Generator;
 import org.gephi.io.generator.spi.GeneratorUI;
@@ -93,9 +92,8 @@ public class StreamingDynamicGraph implements Generator {
 
         //Project
         ProjectController projectController = Lookup.getDefault().lookup(ProjectController.class);
-        ProjectControllerUI projectControllerUI = Lookup.getDefault().lookup(ProjectControllerUI.class);
         if (projectController.getCurrentProject() == null) {
-            projectControllerUI.newProject();
+            projectController.newProject();
         }
 
         //Get current graph

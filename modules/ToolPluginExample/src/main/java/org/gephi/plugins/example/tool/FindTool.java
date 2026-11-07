@@ -60,7 +60,7 @@ import org.gephi.tools.spi.Tool;
 import org.gephi.tools.spi.ToolEventListener;
 import org.gephi.tools.spi.ToolSelectionType;
 import org.gephi.tools.spi.ToolUI;
-import org.gephi.visualization.VizController;
+import org.gephi.visualization.api.VisualizationController;
 import org.jdesktop.swingx.autocomplete.AutoCompleteDecorator;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
@@ -74,7 +74,7 @@ import org.openide.util.lookup.ServiceProvider;
  * <code>getListeners()</code> method doesn't return anything.
  * <p>
  * The <code>select()</code> method is called when the tool is selected by the
- * user. When a node is find it uses the <code>VizController</code> to zoom on
+ * user. When a node is find it uses the <code>VisualizationController</code> to zoom on
  * it.
  * <p>
  * The user interface shows how to associate an icon to the tool.
@@ -124,7 +124,7 @@ public class FindTool implements Tool {
     protected boolean findNode(String label) {
         Node node = data.get(label);
         if (node != null) {
-            VizController.getInstance().getSelectionManager().centerOnNode(node);
+            Lookup.getDefault().lookup(VisualizationController.class).centerOnNode(node);
             return true;
         }
         return false;

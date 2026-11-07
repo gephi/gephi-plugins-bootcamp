@@ -46,6 +46,7 @@ import org.gephi.io.importer.api.ContainerUnloader;
 import org.gephi.io.importer.api.NodeDraft;
 import org.gephi.io.processor.plugin.DefaultProcessor;
 import org.gephi.io.processor.spi.Processor;
+import org.gephi.project.api.Workspace;
 import org.openide.util.lookup.ServiceProvider;
 
 /**
@@ -63,7 +64,7 @@ import org.openide.util.lookup.ServiceProvider;
 public class InitalPositionProcessor extends DefaultProcessor implements Processor {
 
     @Override
-    public void process() {
+    public Workspace[] process() {
         if (containers.length > 1) {
             throw new RuntimeException("This processor can only handle single containers");
         }
@@ -85,7 +86,7 @@ public class InitalPositionProcessor extends DefaultProcessor implements Process
         }
 
         //Call default processor
-        super.process();
+        return super.process();
     }
 
     @Override
