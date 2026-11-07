@@ -51,7 +51,7 @@ import org.gephi.graph.api.Table;
 import org.netbeans.validation.api.Problems;
 import org.netbeans.validation.api.Validator;
 import org.netbeans.validation.api.ui.ValidationGroup;
-import org.netbeans.validation.api.ui.ValidationPanel;
+import org.netbeans.validation.api.ui.swing.ValidationPanel;
 import org.openide.util.NbBundle;
 
 /**
@@ -115,16 +115,19 @@ public class ConvertColumnToDynamicUI extends javax.swing.JPanel implements Attr
     class DoubleValidator implements Validator<String> {
 
         @Override
-        public boolean validate(Problems problems, String compName, String text) {
+        public void validate(Problems problems, String compName, String text) {
             try {
                 Double.parseDouble(text);
                 dialogControls.setOkButtonEnabled(true);
-                return true;
             } catch (NumberFormatException e) {
                 problems.add(NbBundle.getMessage(ConvertColumnToDynamicUI.class, "ConvertColumnToDynamicUI.validator.error", text));
                 dialogControls.setOkButtonEnabled(false);
-                return false;
             }
+        }
+
+        @Override
+        public Class<String> modelType() {
+            return String.class;
         }
     }
 

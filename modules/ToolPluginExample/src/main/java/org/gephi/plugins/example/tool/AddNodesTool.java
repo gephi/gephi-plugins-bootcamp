@@ -61,7 +61,6 @@ import org.gephi.tools.spi.Tool;
 import org.gephi.tools.spi.ToolEventListener;
 import org.gephi.tools.spi.ToolSelectionType;
 import org.gephi.tools.spi.ToolUI;
-import org.gephi.visualization.VizController;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.ServiceProvider;
 
@@ -71,14 +70,10 @@ import org.openide.util.lookup.ServiceProvider;
  * The tool works with two <code>ToolEventListener</code> listeners: One
  * {@link MouseClickEventListener} to react on a click on a empty part of the
  * canvas and one {@link NodeClickEventListener} to react on a click on multiple
- * nodes. The tool is creating a node at the mouse location and adds edges from
- * the newly created node to all selected nodes. That works when the user
- * increases its mouse selection area.
- * <p>
- * The tool also uses some non-api methods of <code>VizController</code>. It's
- * not really recommended at this point but we needed it for the mouse position.
- * The new Visualization API coming in a future version will expose much more
- * things...
+ * nodes. A click on the canvas creates a node at the mouse location, and a click
+ * on nodes creates a node next to them and adds edges from the newly created
+ * node to all clicked nodes. That works when the user increases its mouse
+ * selection area.
  * <p>
  * This tool class also has an UI class which displays a simple checkbox in the
  * properties bar. The checkbox triggers a layout algorithm.
@@ -87,6 +82,8 @@ import org.openide.util.lookup.ServiceProvider;
  */
 @ServiceProvider(service = Tool.class)
 public class AddNodesTool implements Tool {
+
+    private static final float NEW_NODE_OFFSET = 20f;
 
     private final AddNodesToolUI ui = new AddNodesToolUI();
 
@@ -104,7 +101,7 @@ public class AddNodesTool implements Tool {
             new MouseClickEventListener() {
 
                 @Override
-                public void mouseClick(int[] positionViewport, float[] position3d) {
+                public boolean mouseClick(int[] positionViewport, float[] position3d) {
                     //Get current graph
                     GraphController gc = Lookup.getDefault().lookup(GraphController.class);
                     Graph graph = gc.getGraphModel().getGraph();
@@ -116,14 +113,26 @@ public class AddNodesTool implements Tool {
                     node.setY(position3d[1]);
                     node.setSize(10f);
                     graph.addNode(node);
+                    return true;
                 }
             },
             new NodeClickEventListener() {
 
                 @Override
-                public void clickNodes(Node[] nodes) {
-                    //Get mouse position
-                    float[] position3d = VizController.getInstance().getGraphIO().getMousePosition3d();
+                public boolean clickNodes(Node[] nodes) {
+                    if (nodes.length == 0) {
+                        return false;
+                    }
+
+                    //Place the new node next to the centroid of the clicked nodes
+                    float x = 0;
+                    float y = 0;
+                    for (Node n : nodes) {
+                        x += n.x();
+                        y += n.y();
+                    }
+                    x = x / nodes.length + NEW_NODE_OFFSET;
+                    y = y / nodes.length + NEW_NODE_OFFSET;
 
                     //Get current graph
                     GraphController gc = Lookup.getDefault().lookup(GraphController.class);
@@ -132,8 +141,8 @@ public class AddNodesTool implements Tool {
 
                     //Add node
                     Node node = factory.newNode();
-                    node.setX(position3d[0]);
-                    node.setY(position3d[1]);
+                    node.setX(x);
+                    node.setY(y);
                     node.setSize(10f);
                     graph.addNode(node);
 
@@ -142,6 +151,7 @@ public class AddNodesTool implements Tool {
                         Edge edge = factory.newEdge(node, n);
                         graph.addEdge(edge);
                     }
+                    return true;
                 }
             }};
     }
